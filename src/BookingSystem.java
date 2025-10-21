@@ -9,6 +9,8 @@ public class BookingSystem {
         // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
         // Der skal laves en Appointment ud fra dens konstruktør
 
+        //test
+
         // Der skal være et IF-check som ser om der er et customerID
         // Hvis der et et customerID så læs deres navn & telefonnummer ud fra filen
 
