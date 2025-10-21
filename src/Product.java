@@ -1,22 +1,22 @@
 public class Product {
 
-    private String name;
-    private double price;
+    private String productName;
+    private double productPrice;
 
     public Product(String name, double price) {
-        this.name = name;
-        this.price = price;
+        this.productName = name;
+        this.productPrice = price;
     }
 
-    public String getName(){
-        return name;
+    public String getProductName(){
+        return productName;
     }
 
-    public double getPrice(){
-        return price;
+    public double getProductPrice(){
+        return productPrice;
     }
 
     public String toString(){
-        return "product name: " + name + " product price: " + price;
+        return "product name: " + productName + " product price: " + productPrice;
     }
 }

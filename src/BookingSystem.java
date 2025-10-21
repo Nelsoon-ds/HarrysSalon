@@ -1,18 +1,80 @@
 import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
 
-    private ArrayList<Appointment> appointments;
-    private int appId = 1;
-    private void makeAppointment(){
-        // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
-        // Der skal laves en Appointment ud fra dens konstruktør
+    // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
+    // Der skal laves en Appointment ud fra dens konstruktør
 
-        //test
+    private ArrayList<Appointment> appointments = new ArrayList<>();
+    private int appointmentId = 1;
+
+
+    public static void createAppointment(){
+
+        Scanner input = new Scanner(System.in);
 
         // Der skal være et IF-check som ser om der er et customerID
         // Hvis der et et customerID så læs deres navn & telefonnummer ud fra filen
+
+
+        System.out.print("Enter CustomerName: ");
+        String customerName = input.nextLine();
+
+        System.out.println("Enter CustomerPhone: ");
+        int customerPhone = input.nextInt();
+        input.nextLine();
+
+
+        //Formatering af dato og tid
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        System.out.println("Enter date (Format for date: dd/MM/yyyy): ");
+        String dateString = input.nextLine();
+        LocalDate date = LocalDate.parse(dateString, dateFormatter);
+
+        System.out.println("Enter time of appointment (Time format: HH:mm");
+        String timeString = input.nextLine();
+        LocalTime time = LocalTime.parse(timeString, timeFormatter);
+
+        //Shoppingcart her.
+
+        ShoppingCart cart = new ShoppingCart();
+        ShoppingCart.showProductList();
+
+
+        boolean addingProducts = true;
+        while (addingProducts) {
+
+            if ()
+            System.out.print("Enter product name (Stop: stop): ");
+            String productName = input.nextLine();
+
+        }
+
+
+        // System.out.println("--- TEST TEST TEST ---");
+
+
+
+        // Skal beregnes senere.
+        double totalPrice = 0.0;
+
+
+
+
+
+
+
+
+
+
+
 
         // Derefter kan selve flowet begynde:
         // Data som vi henter fra scanner input:
@@ -21,9 +83,16 @@ public class BookingSystem {
         // date
         // time
 
+
         //for at få vores variabel products er vi nødt til at lave et
         // shoppingcart objekt som vi kalder cart
         // ShoppingCart cart = new ShoppingCart()
+
+
+
+
+
+
         // Når vi laver objektet så kaldes carts metode cart.showCart() som er et
         // print af de mulige produkter. Produkterne har et toString allerede.
         // Den bruger en scanner til at tilføje mulige produkter til en liste
@@ -33,6 +102,12 @@ public class BookingSystem {
         // appId++ inkrementer bookingsystemets lokale værdi så vi kan have unikke bookinger
        // Appointment example =  new Appointment(appId++, customerName, customerPhone... etc)
         // appointments.add(example);
+
+
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
+                time, cart, totalPrice);
+
+        System.out.println("new Appointment created: " + appointment);
 
     }
 

@@ -16,7 +16,23 @@ public class ShoppingCart {
 
 
 
+
+    public static void showProductList() {
+        System.out.println("Product List: ");
+        for (int i = 0; i < PRODUCTS.size(); i++) {
+            System.out.println(PRODUCTS.get(i));
+        }
+        System.out.println("End of List. ");
+
+       // kan evt. bruges til debug? System.out.println(Arrays.toString(PRODUCTS.toArray()));
+    }
+
+
+
+
+
     public void addProduct(Product product){
+        System.out.println("");
 
     }
 
