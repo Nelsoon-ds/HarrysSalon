@@ -47,26 +47,26 @@ public class BookingSystem {
         ShoppingCart cart = new ShoppingCart();
         ShoppingCart.showProductList();
 
-
         boolean addingProducts = true;
         while (addingProducts) {
-
-            if ()
-            System.out.print("Enter product name (Stop: stop): ");
+            System.out.print("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
             String productName = input.nextLine();
 
+            if (productName.equals("stop")){
+                addingProducts = false;
+            } else {
+                cart.addProduct(productName);
+            }
         }
 
-
-        // System.out.println("--- TEST TEST TEST ---");
-
-
-
-        // Skal beregnes senere.
-        double totalPrice = 0.0;
+        double totalPrice = cart.showTotalPrice();
 
 
 
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
+                time, cart, totalPrice);
+
+        System.out.println("new Appointment created: " + appointment);
 
 
 
@@ -103,11 +103,6 @@ public class BookingSystem {
        // Appointment example =  new Appointment(appId++, customerName, customerPhone... etc)
         // appointments.add(example);
 
-
-        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
-                time, cart, totalPrice);
-
-        System.out.println("new Appointment created: " + appointment);
 
     }
 
