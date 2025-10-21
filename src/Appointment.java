@@ -7,11 +7,12 @@ public class Appointment {
     private int appointmentId = 1;
     private String customerName = "noname";
     private int customerPhone;
+    private int customerId;
     private LocalDate date;
     private LocalTime time;
     private ArrayList<Product> products;
     private double totalPrice;
-    private boolean hasPaid;
+    //private boolean hasPaid;
 
 
     public int getAppointmentId() {
