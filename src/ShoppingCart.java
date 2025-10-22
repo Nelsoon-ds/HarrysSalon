@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ public class ShoppingCart {
             new Product("Shampoo", 150),
             new Product("Balsam", 150)
     ));
+    public ArrayList<Product> getProducts;
 
     ArrayList<Product> products;
 
@@ -31,16 +33,40 @@ public class ShoppingCart {
 
 
 
-    public void addProduct(Product product){
-        System.out.println("");
+    public void addProduct(Product product, int quantity){
+        boolean found = false;
 
+        //checker om der allerede er noget i Cart
+        for (Product p1 : products) {
+            if (p1.getProductName.equals(product.getProductName())) {
+                p1.setQuantity(p1.setQuantity()) + quantity);
+                found = true;
+                System.out.println(quantity + " " + product.getProductName() + "tilføjet til kurven. Nyt antal: " + p1.getQuantity());
+                break;
+            }
+        }
+
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public void showCart(){
+        System.out.println("Produkter tilføjet: ");
+        if (products.isEmpty()) {
+            System.out.println("Ingen tilkøbsprodukter tiløjet ");
+        } else {
+
+
+        }
 
     }
 
-    public void showTotalPrice(){
+    public double showTotalPrice(){
+        double total = 00.00;
+        System.out.println("Total pris: " + total + "kr.");
+        return total;
 
     }
 

@@ -59,12 +59,15 @@ public class BookingSystem {
             }
         }
 
+        ArrayList<Product> products = cart.getProducts;
+
         double totalPrice = cart.showTotalPrice();
 
 
 
         Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
                 time, cart, totalPrice);
+        appointment.add(appointment);
 
         System.out.println("new Appointment created: " + appointment);
 
