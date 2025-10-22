@@ -43,7 +43,7 @@ public class ShoppingCart {
             }
         }
             if (!found) {
-                product newProduct = new Product(product.getProductName(), product.getProductPrice());
+                Product newProduct = new Product(product.getProductName(), product.getProductPrice());
                  newProduct.setProductQuantity(quantity);
                 product.add(newProduct);
                 System.out.println(quantity + " stk. " + product.getProductName() + "tilføjet til kurven.");
