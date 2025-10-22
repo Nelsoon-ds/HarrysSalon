@@ -51,6 +51,7 @@ public class FileHandler {
                     int customerPhone = Integer.parseInt(parts[2]);
                     LocalDate date = LocalDate.parse(parts[3]);
                     LocalTime time = LocalTime.parse(parts[4]);
+                    String rawProductString = parts[5];
                     ArrayList<Product> products = convertRawStringtoArrayList(parts[5]);
                     double totalPrice = Double.parseDouble(parts[6]);
               appointments[i] = new Appointment(appointmentId, customerName, customerPhone, date, time, products, totalPrice); // Vi skal have tilføjet en konstruktør
