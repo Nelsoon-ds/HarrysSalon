@@ -1,16 +1,36 @@
+import java.io.File;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
-    private static ArrayList<Appointment> appointments = new ArrayList<>();
-    private static int appointmentId = 1;
 
+    private static ArrayList<Appointment> appointments = new ArrayList<>(List.of(
+            // Aftale 1
+            new Appointment(1, "Test Kunde 1", 12345678,
+                    LocalDate.of(2024, 10, 20), LocalTime.of(9, 0),
+                    new ArrayList<>(), 500.0), // Bruger new ArrayList<>() for tom produktliste
+
+            // Aftale 2
+            new Appointment(2, "Test Kunde 2", 87654321,
+                    LocalDate.of(2024, 10, 21), LocalTime.of(10, 30),
+                    new ArrayList<>(), 750.0)
+
+            // Tilføj flere her adskilt af komma...
+    ));
+    private static int appointmentId = 1;
     public static void main(String[] args) {
-        createAppointment();
+        appointments = FileHandler.readFromFile();
+        for (int i = 0; i < appointments.size(); i++) {
+            System.out.println(appointments.get(i));
+        }
+//        createAppointment();
+//        FileHandler.writeToFile(appointments);
     }
 
     public static void createAppointment() {
@@ -90,10 +110,8 @@ public class BookingSystem {
         ArrayList<Product> selectedProducts = cart.getProducts();
         System.out.println(selectedProducts);
         double totalPrice = cart.showTotalPrice();
-
         Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone,
                 date, time, selectedProducts, totalPrice);
-
         appointments.add(appointment);
         System.out.println("Ny aftale oprettet: " + appointment);
 
@@ -137,23 +155,9 @@ public class BookingSystem {
         // eksistere eller er i forkert format.
     }
 
-//    public ArrayList<Appointment> getAppointments() {
-//        // Formål: At hente en liste af bookinger fra vores master fil
-//        // Den skal have et objekt af vores FileHandler som så bruges til at kalde
-//        // FileHandlers read() metode
-//        // Derefter skal vi gemme resultaterne af det i vores appointments arraylist
-//        // Vi starter dog med at bruge fake data til at arbejde med:
-//        // Fake data:
-//        Appointment app1 = new Appointment();
-//        Appointment app2 = new Appointment();
-//        Appointment app3 = new Appointment();
-//        Appointment app4 = new Appointment();
-//        appointments.add(app1);
-//        appointments.add(app2);
-//        appointments.add(app3);
-//        appointments.add(app4);
-//        return appointments;
-//    }
+    public static ArrayList<Appointment>  getAppointments() {
+        return appointments;
+    }
 
 //    public void saveAppointments (ArrayList<Appointment> appointments) {
 //        // kalder FileHandler med appointment listen

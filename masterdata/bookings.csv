@@ -1,2 +1,5 @@
 appointmentId,customerName,customerPhone,date,time,products[],totalPrice
-1,Anna Jensen,22334455,2025-10-28,10:00,[Hårvask:100:3;, Hårvask:200:3;],649.0
+1,Test Kunde 1,12345678,2024-10-20,09:00,[],500.0
+2,Test Kunde 2,87654321,2024-10-21,10:30,[],750.0
+1,David,25176950,2025-10-10,10:00,[Shampoo|150|4],600.0
+1,David,25176950,2025-10-10,10:00,[Hårbørste|550|1],550.0

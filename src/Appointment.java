@@ -67,9 +67,9 @@ public class Appointment {
         this.time = time;
     }
 
-//    public ArrayList<Product> getProducts() {
-//        return products;
-//    }
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
 
 //    public void setProducts(ArrayList<Product> products) {
 //        this.products = products;
@@ -94,12 +94,12 @@ public class Appointment {
     @Override
     public String toString() {
         return appointmentId +
-                "," + customerName +
-                "," + customerPhone +
-                "," + date +
-                "," + time +
-                "," + products +
-                "," + totalPrice;
+                 customerName +
+                  customerPhone +
+                  date +
+                 time +
+                 products +
+                 totalPrice;
     }
 
     private void addProducts(Product product){
