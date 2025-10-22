@@ -1,2 +1,2 @@
 appointmentId,customerName,customerPhone,date,time,products[],totalPrice
-1,Anna Jensen,22334455,2025-10-28,10:00,[Hårvask:100:4, Hårvask:200],649.0
+1,Anna Jensen,22334455,2025-10-28,10:00,[Hårvask:100:3;, Hårvask:200:3;],649.0

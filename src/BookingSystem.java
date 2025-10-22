@@ -8,8 +8,6 @@ import java.time.format.DateTimeFormatter;
 public class BookingSystem {
     private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static int appointmentId = 1;
-    private static int customerId = 1;
-    private static int customerPhone = 0;
 
     public static void main(String[] args) {
         createAppointment();
@@ -17,9 +15,11 @@ public class BookingSystem {
 
     public static void createAppointment() {
         Scanner input = new Scanner(System.in);
+        int customerPhone = 0;
         // Indlæs kundens oplysninger
         System.out.print("Indtast kundens navn: ");
         String customerName = input.nextLine();
+
 
         boolean numberCheckFalseTrue = false;
         while (numberCheckFalseTrue == false) {
@@ -57,12 +57,10 @@ public class BookingSystem {
         while (time == null) {
             System.out.print("Indtast tidspunkt for aftale (Tidspunkt format: HH:mm): ");
             String timeString = input.nextLine();
-
             if (timeString.length() != 5) {
                 System.out.println("Brug kun formatet: HH:mm !");
                 continue;
             }
-
             try {
                 time = LocalTime.parse(timeString, timeFormatter);
                 if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(18, 0))) {
@@ -71,11 +69,13 @@ public class BookingSystem {
                 }
             } catch (Exception e) {
                 System.out.println("Forkert format, vær venlig at bruge HH:mm!");
+            }
+        }
         //Shoppingcart her.
         ShoppingCart cart = new ShoppingCart();
         boolean addingProducts = true;
         while (addingProducts) {
-            cart.showCart();
+            cart.showProductList();
             System.out.println("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
             String productName = input.nextLine();
             if (productName.equalsIgnoreCase("stop")) {
@@ -85,26 +85,22 @@ public class BookingSystem {
             }
         }
 
-
-
         //total pris
         System.out.println("\n--- Prisoversigt ---");
-        double totalPrice = cart.showTotalPrice();
-        ArrayList<Product> products = new ArrayList<>();
-
         ArrayList<Product> selectedProducts = cart.getProducts();
+        System.out.println(selectedProducts);
+        double totalPrice = cart.showTotalPrice();
 
-        System.out.println();
-
-        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, customerId,
-                date, time, products, totalPrice);
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone,
+                date, time, selectedProducts, totalPrice);
 
         appointments.add(appointment);
         System.out.println("Ny aftale oprettet: " + appointment);
 
+                System.out.println("Og print nu listen");
+                System.out.println(appointment);
 
-    } }}
-
+    }
     private void findAppointment() {
         // Find navn
         // Find telefon
@@ -159,10 +155,11 @@ public class BookingSystem {
 //        return appointments;
 //    }
 
-        public void saveAppointments (ArrayList<Appointment> appointments) {
-        // kalder FileHandler med appointment listen
-        // kalder FileHandler.save(appointments)
-    }
-
+//    public void saveAppointments (ArrayList<Appointment> appointments) {
+//        // kalder FileHandler med appointment listen
+//        // kalder FileHandler.save(appointments)
+//    }
 
 }
+
+

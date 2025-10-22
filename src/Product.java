@@ -36,6 +36,6 @@ public class Product {
     }
 
     public String toString(){
-        return productName + ":" + productPrice + ":" + productQuantity + delimiter; // ; fungerer som delimiter
+        return productName + "|" + productPrice + "|" + productQuantity;
 }
 }

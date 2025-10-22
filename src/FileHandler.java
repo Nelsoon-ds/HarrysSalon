@@ -15,7 +15,7 @@ public class FileHandler {
 
     public static void main(String[] args) {
         readFromFile();
-        //writeToFile();
+        writeToFile();
 
     }
 
@@ -112,8 +112,8 @@ public class FileHandler {
         products.add(h1);
         products.add(h2);
 
-        Appointment app1 = new Appointment(1, "Anna Jensen", 22334455, 101,
-                LocalDate.of(2025, 10, 28), LocalTime.of(10, 0), products, 649.0);
+        Appointment app1 = new Appointment(1, "Anna Jensen", 22334455, LocalDate.of(2025, 10, 28)
+                , LocalTime.of(10, 0), products, 649.0);
         appointmentsList.add(app1); // <-- Tilføj til listen
 
 

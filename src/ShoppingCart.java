@@ -8,12 +8,12 @@ public class ShoppingCart {
      * Produktlisten som vi indsætter produkter i
       */
     public static final List<Product> PRODUCTS = new ArrayList<Product>(Arrays.asList(
-            new Product("Hårbørste", "550", "3"),
-            new Product("Shampoo", "150", "3"),
-            new Product("Balsam", "150", "4")
+            new Product("Hårbørste", "550", "1"),
+            new Product("Shampoo", "150", "1"),
+            new Product("Balsam", "150", "1")
     ));
 
-    public ArrayList<Product> products;
+    public ArrayList<Product> products = new ArrayList<>();
 
     public ArrayList<Product> getProducts() {
         return products;
@@ -31,13 +31,23 @@ public class ShoppingCart {
         System.out.println();
 
     }
-    public static void showProductList() {
-        System.out.println("Product List: ");
+    public void showProductList() {
+        System.out.println("Harrys Salon Produktliste:");
+        System.out.println("Nr\tNavn\tPris\tAntal");
         for (int i = 0; i < PRODUCTS.size(); i++) {
             System.out.println((i + 1) + " " + PRODUCTS.get(i));
         }
-        System.out.println("End of List. \n");
        // kan evt. bruges til debug? System.out.println(Arrays.toString(PRODUCTS.toArray()));
+    }
+
+    public double showTotalPrice(){
+        double total = 00.00;
+        ArrayList<Product> products = getProducts();
+        for (Product product : products) {
+            total += Double.valueOf(product.getProductPrice()) * Double.valueOf(product.getProductQuantity());
+        }
+        System.out.println("Total pris: " + total + "kr.");
+        return total;
     }
 
     /*
@@ -51,14 +61,14 @@ public class ShoppingCart {
                     System.out.println("Hvor mange " + productName + " vil du købe?");
                     String productQuantity = scan.next();
                     String productPrice = product.getProductPrice();
-                    products.add(new Product(productName, productPrice, productQuantity));
-                } else {
-                    System.out.println("Det er ikke et produkt vi har desværre.");
+                    this.products.add(new Product(productName, productPrice, productQuantity));
                     return;
                 }
             }
+        System.out.println("Det er ikke et produkt vi har desværre.");
 
-        }
+
+    }
     }
 
 
@@ -66,15 +76,6 @@ public class ShoppingCart {
 /*
 * Vi skal fikse det her efter vi har fået styr på data typerne med parseren i FileHandler.
  */
-
-//    public double showTotalPrice(){
-//        double total = 00.00;
-//        for (Product product : products) {
-//            total += product.getProductPrice() * product.getProductQuantity();
-//        }
-//        System.out.println("Total pris: " + total + "kr.");
-//        return total;
-//    }
 
 
 
