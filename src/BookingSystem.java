@@ -43,33 +43,33 @@ public class BookingSystem {
         LocalTime time = LocalTime.parse(timeString, timeFormatter);
 
         //Shoppingcart her.
-
         ShoppingCart cart = new ShoppingCart();
-        ShoppingCart.showProductList();
-
         boolean addingProducts = true;
         while (addingProducts) {
-            System.out.print("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
+            System.out.println("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
             String productName = input.nextLine();
-
-            if (productName.equals("stop")){
+            if (productName.equalsIgnoreCase("stop")) {
                 addingProducts = false;
             } else {
                 cart.addProduct(productName);
             }
         }
 
-        ArrayList<Product> products = cart.getProducts;
+        //vis kurv
+        System.out.println("\n--- " + customerName "s Kurv ---");
+        cart.showCart();
 
+        //total pris
+        System.out.println("\n--- Prisoversigt ---");
         double totalPrice = cart.showTotalPrice();
 
+        ArrayList<Product> selectedProducts = cart.getProducts();
+
+        System.out.println();
 
 
-        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
-                time, products, totalPrice);
-        appointment.add(appointment);
 
-        System.out.println("new Appointment created: " + appointment);
+
 
 
 

@@ -4,12 +4,13 @@ public class Product {
     private String productName;
     private double productPrice;
 
+    //konstruktør (navn og pris)
     public Product(String name, double price) {
         this.productQuantity = 1;
         this.productName = name;
         this.productPrice = price;
     }
-
+    //konstruktør (quantity, navn og pris)
     public Product(int quantity, String name, double price) {
         this.productQuantity = quantity;
         this.productName = name;
@@ -43,7 +44,12 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public String toString(){
-        return "x " + productQuantity + productname: " + productName + " product price: " + productPrice;
+
+
+    public String toString() {
+        return "Product{" +
+                "productQuantity=" + productQuantity +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                '}';
     }
-}
