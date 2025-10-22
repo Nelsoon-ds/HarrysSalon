@@ -8,68 +8,85 @@ import java.time.format.DateTimeFormatter;
 public class BookingSystem {
 
     // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
-    // Der skal laves en Appointment ud fra dens konstruktør
-
-    private ArrayList<Appointment> appointments = new ArrayList<>();
-    private int appointmentId = 1;
+    // Der skal laves en Appointment ud fra dens konstruktør'
 
 
-    public static void createAppointment(){
 
+    public static void main(String[] args) {
+        createAppointment();
+    }
+
+
+    private static ArrayList<Appointment> appointments = new ArrayList<>();
+    private static int appointmentId = 1;
+    private static int customerId = 1;
+
+
+    public static void createAppointment() {
         Scanner input = new Scanner(System.in);
 
-        // Der skal være et IF-check som ser om der er et customerID
-        // Hvis der et et customerID så læs deres navn & telefonnummer ud fra filen
-
-
-        System.out.print("Enter CustomerName: ");
+        // Indlæs kundens oplysninger
+        System.out.print("Indtast kundens navn: ");
         String customerName = input.nextLine();
 
-        System.out.println("Enter CustomerPhone: ");
+        System.out.print("Indtast kundens telefonnummer: ");
         int customerPhone = input.nextInt();
-        input.nextLine();
+        input.nextLine(); // for at "cleane" scannerens newline
 
-
-        //Formatering af dato og tid
+        // Formatering af dato og tid
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        System.out.println("Enter date (Format for date: dd/MM/yyyy): ");
-        String dateString = input.nextLine();
-        LocalDate date = LocalDate.parse(dateString, dateFormatter);
+        LocalDate date = null;
+        while (date == null) {
+            System.out.print("Indtast dato for aftalen (Format for dato: dd/MM/yyyy): ");
+            String dateString = input.nextLine();
 
-        System.out.println("Enter time of appointment (Time format: HH:mm");
-        String timeString = input.nextLine();
-        LocalTime time = LocalTime.parse(timeString, timeFormatter);
-
-        //Shoppingcart her.
-
-        ShoppingCart cart = new ShoppingCart();
-        ShoppingCart.showProductList();
-
-        boolean addingProducts = true;
-        while (addingProducts) {
-            System.out.print("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
-            String productName = input.nextLine();
-
-            if (productName.equals("stop")){
-                addingProducts = false;
-            } else {
-                cart.addProduct(productName);
+            try {
+                date = LocalDate.parse(dateString, dateFormatter);
+                if (date.getDayOfWeek().getValue() >= 6) {
+                    System.out.println("Brug kun en dato, på en af ugedagene: mandag - fredag");
+                    date = null;
+                }
+            } catch (Exception e) {
+                System.out.println("Fejl: forkert dato format (dd/MM/yyyy)!");
             }
         }
 
-        ArrayList<Product> products = cart.getProducts;
+        LocalTime time = null;
+        while (time == null) {
+            System.out.print("Indtast tidspunkt for aftale (Tidspunkt format: HH:mm): ");
+            String timeString = input.nextLine();
 
-        double totalPrice = cart.showTotalPrice();
+            if (timeString.length() != 5) {
+                System.out.println("Brug kun formatet: HH:mm !");
+                continue;
+            }
+
+            try {
+                time = LocalTime.parse(timeString, timeFormatter);
+                if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(18, 0))) {
+                    System.out.println("Ugyldigt tidspunkt: Vær venlig at vælge et tidspunkt mellem 10:00 - 18:00!");
+                    time = null;
+                }
+            } catch (Exception e) {
+                System.out.println("Forkert format, vær venlig at bruge HH:mm!");
+            }
+        }
+
+        ArrayList<Product> products = new ArrayList<>();
+        double totalPrice = 0.0;
 
 
 
-        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
-                time, products, totalPrice);
-        appointment.add(appointment);
 
-        System.out.println("new Appointment created: " + appointment);
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, customerId,
+                date, time, products, totalPrice);
+
+        appointments.add(appointment);
+        System.out.println("Ny aftale oprettet: " + appointment);
+
+    }
 
 
 
@@ -107,7 +124,7 @@ public class BookingSystem {
         // appointments.add(example);
 
 
-    }
+
 
     private void findAppointment() {
         // Find navn
@@ -145,23 +162,6 @@ public class BookingSystem {
         // eksistere eller er i forkert format.
     }
 
-    public ArrayList<Appointment> getAppointments() {
-        // Formål: At hente en liste af bookinger fra vores master fil
-        // Den skal have et objekt af vores FileHandler som så bruges til at kalde
-        // FileHandlers read() metode
-        // Derefter skal vi gemme resultaterne af det i vores appointments arraylist
-        // Vi starter dog med at bruge fake data til at arbejde med:
-        // Fake data:
-        Appointment app1 = new Appointment();
-        Appointment app2 = new Appointment();
-        Appointment app3 = new Appointment();
-        Appointment app4 = new Appointment();
-        appointments.add(app1);
-        appointments.add(app2);
-        appointments.add(app3);
-        appointments.add(app4);
-        return appointments;
-    }
 
     public void saveAppointments (ArrayList<Appointment> appointments) {
         // kalder FileHandler med appointment listen

@@ -84,18 +84,19 @@ public class Appointment {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isHasPaid() {
-        return hasPaid;
-    }
 
-    public void setHasPaid(boolean hasPaid) {
-        this.hasPaid = hasPaid;
-    }
+    //    public boolean isHasPaid() {
+    //        return hasPaid;
+    //    }
+    //
+    //    public void setHasPaid(boolean hasPaid) {
+    //        this.hasPaid = hasPaid;
+    //    }
+
 
     @Override
     public String toString() {
         return "Appointment{" +
-                "hasPaid=" + hasPaid +
                 ", totalPrice=" + totalPrice +
                 ", products=" + products +
                 ", time=" + time +
