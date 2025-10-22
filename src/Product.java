@@ -1,22 +1,56 @@
 public class Product {
 
-    private String name;
-    private double price;
+    private int productQuantity;
+    private String productName;
+    private double productPrice;
 
+    //konstruktør (navn og pris)
     public Product(String name, double price) {
-        this.name = name;
-        this.price = price;
+        this.productQuantity = 1;
+        this.productName = name;
+        this.productPrice = price;
+    }
+    //konstruktør (quantity, navn og pris)
+    public Product(int quantity, String name, double price) {
+        this.productQuantity = quantity;
+        this.productName = name;
+        this.productPrice = price;
     }
 
-    public String getName(){
-        return name;
+    //setters og getters
+
+
+    public int getProductQuantity() {
+        return productQuantity;
     }
 
-    public double getPrice(){
-        return price;
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 
-    public String toString(){
-        return "product name: " + name + " product price: " + price;
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+
+
+    public String toString() {
+        return "Product{" +
+                "productQuantity=" + productQuantity +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                '}';
     }
 }
