@@ -1,18 +1,18 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Appointment {
 
     private int appointmentId = 1;
-    private int customerId;
     private String customerName = "noname";
     private int customerPhone;
     private LocalDate date;
     private LocalTime time;
     private ArrayList<Product> products;
     private double totalPrice;
-    //private boolean hasPaid;
+    private boolean hasPaid;
 
 
     public Appointment(int appointmentId, String customerName, int customerPhone, int customerId,
@@ -20,7 +20,6 @@ public class Appointment {
         this.appointmentId = appointmentId;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
-        this.customerId = customerId;
         this.date = date;
         this.time = time;
         this.products = products;
@@ -68,13 +67,13 @@ public class Appointment {
         this.time = time;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
-    }
+//    public ArrayList<Product> getProducts() {
+//        return products;
+//    }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
+//    public void setProducts(ArrayList<Product> products) {
+//        this.products = products;
+//    }
 
     public double getTotalPrice() {
         return totalPrice;
@@ -94,28 +93,24 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
-                "hasPaid=" + hasPaid +
-                ", totalPrice=" + totalPrice +
-                ", products=" + products +
-                ", time=" + time +
-                ", date=" + date +
-                ", customerPhone=" + customerPhone +
-                ", customerName='" + customerName + '\'' +
-                ", appointmentId=" + appointmentId +
-                '}';
+        return appointmentId +
+                "," + customerName +
+                "," + customerPhone +
+                "," + date +
+                "," + time +
+                "," + products +
+                "," + totalPrice;
     }
 
     private void addProducts(Product product){
-        products.add(product);
-
+       // products.add(String.valueOf(product));
     }
 
-    private void removeProducts(Product product){
-        products.remove(product);
-
-
-    }
+//    private void removeProducts(Product product){
+//        products.remove(product);
+//
+//
+//    }
 
 
 

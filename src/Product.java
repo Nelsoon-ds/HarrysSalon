@@ -2,7 +2,7 @@ public class Product {
 
     private String name;
     private String price;
-
+    private String delimiter = ";";
     public Product(String name, String price) {
         this.name = name;
         this.price = price;
@@ -17,6 +17,6 @@ public class Product {
     }
 
     public String toString(){
-        return "product name: " + name + " product price: " + price;
+        return name + ":" + price + delimiter; // ; fungerer som delimiter
     }
 }
