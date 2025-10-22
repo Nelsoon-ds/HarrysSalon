@@ -15,7 +15,7 @@ public class Appointment {
     private boolean hasPaid;
 
 
-    public Appointment(int appointmentId, String customerName, int customerPhone, int customerId,
+    public Appointment(int appointmentId, String customerName, int customerPhone,
                        LocalDate date, LocalTime time, ArrayList<Product> products, double totalPrice) {
         this.appointmentId = appointmentId;
         this.customerName = customerName;

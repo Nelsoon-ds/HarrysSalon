@@ -6,31 +6,22 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
-
-    // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
-    // Der skal laves en Appointment ud fra dens konstruktør
-
-    public static void main(String[] args) {
-        createAppointment();
-    }
-
-
     private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static int appointmentId = 1;
     private static int customerId = 1;
     private static int customerPhone = 0;
 
+    public static void main(String[] args) {
+        createAppointment();
+    }
 
     public static void createAppointment() {
         Scanner input = new Scanner(System.in);
-
         // Indlæs kundens oplysninger
         System.out.print("Indtast kundens navn: ");
         String customerName = input.nextLine();
 
-
         boolean numberCheckFalseTrue = false;
-
         while (numberCheckFalseTrue == false) {
             System.out.print("Indtast kundens telefonnummer: ");
 
@@ -40,11 +31,8 @@ public class BookingSystem {
             } else {
                 System.out.println("Indtast kun tal!");
             }
-
             input.nextLine();
         }
-
-
         // Formatering af dato til tid
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -87,18 +75,17 @@ public class BookingSystem {
         ShoppingCart cart = new ShoppingCart();
         boolean addingProducts = true;
         while (addingProducts) {
+            cart.showCart();
             System.out.println("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
             String productName = input.nextLine();
             if (productName.equalsIgnoreCase("stop")) {
                 addingProducts = false;
             } else {
-                cart.addProduct(productName);
+                cart.addProduct(productName); // skal fikses
             }
         }
 
-        //vis kurv
-        System.out.println("\n--- " + customerName "s Kurv ---");
-        cart.showCart();
+
 
         //total pris
         System.out.println("\n--- Prisoversigt ---");

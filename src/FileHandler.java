@@ -45,7 +45,6 @@ public class FileHandler {
                 if (parts.length == 7) {
                     System.out.println(parts[5]);// længden skal være lig antallet af attributter
                     System.out.println(parts[6]);// længden skal være lig antallet af attributter
-
                     int appointmentId = Integer.parseInt(parts[0]);
                     String customerName = parts[1];
                     int customerPhone = Integer.parseInt(parts[2]);
@@ -77,9 +76,10 @@ public class FileHandler {
       //  name:price;
       //  name:price;
         for (int i = 0; i < parts.length; i++) {
-            String name = parts[i].trim();
-            String priceStr = parts[i + 1].trim();
-            products.add(new Product(name, priceStr));}
+            String productName = parts[i].trim();
+            String productPrice = parts[i + 1].trim();
+            String productQuantity = parts[i + 2].trim();
+            products.add(new Product(productName, productPrice, productQuantity));}
         return products;
     }
 
@@ -107,8 +107,8 @@ public class FileHandler {
         ArrayList<Appointment> appointmentsList = new ArrayList<>();
         // Appointment 1
         ArrayList<Product> products = new ArrayList<>();
-        Product h1 = new Product("Hårvask", "100");
-        Product h2 = new Product("Hårvask", "200");
+        Product h1 = new Product("Hårvask", "100", "3");
+        Product h2 = new Product("Hårvask", "200", "3");
         products.add(h1);
         products.add(h2);
 

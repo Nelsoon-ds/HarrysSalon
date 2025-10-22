@@ -15,11 +15,11 @@ public class Product {
     //setters og getters
 
 
-    public int getProductQuantity() {
+    public String getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(String productQuantity) {
         this.productQuantity = productQuantity;
     }
 
@@ -36,6 +36,6 @@ public class Product {
     }
 
     public String toString(){
-        return productName + ":" + productPrice + delimiter; // ; fungerer som delimiter
+        return productName + ":" + productPrice + ":" + productQuantity + delimiter; // ; fungerer som delimiter
 }
 }
