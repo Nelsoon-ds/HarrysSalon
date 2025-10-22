@@ -11,7 +11,6 @@ public class BookingSystem {
     // Der skal laves en Appointment ud fra dens konstruktør'
 
 
-
     public static void main(String[] args) {
         createAppointment();
     }
@@ -20,6 +19,7 @@ public class BookingSystem {
     private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static int appointmentId = 1;
     private static int customerId = 1;
+    private static int customerPhone = 0;
 
 
     public static void createAppointment() {
@@ -29,11 +29,24 @@ public class BookingSystem {
         System.out.print("Indtast kundens navn: ");
         String customerName = input.nextLine();
 
-        System.out.print("Indtast kundens telefonnummer: ");
-        int customerPhone = input.nextInt();
-        input.nextLine(); // for at "cleane" scannerens newline
 
-        // Formatering af dato og tid
+        boolean numberCheckFalseTrue = false;
+
+        while (numberCheckFalseTrue == false) {
+            System.out.print("Indtast kundens telefonnummer: ");
+
+            if (input.hasNextInt()) {
+                customerPhone = input.nextInt();
+                numberCheckFalseTrue = true;
+            } else {
+                System.out.println("Indtast kun tal!");
+            }
+
+            input.nextLine();
+        }
+
+
+        // Formatering af dato til tid
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -74,10 +87,9 @@ public class BookingSystem {
             }
         }
 
+
         ArrayList<Product> products = new ArrayList<>();
-        double totalPrice = 0.0;
-
-
+        double totalPrice = 0.0;  //evt. ryk denne?
 
 
         Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, customerId,
@@ -96,37 +108,45 @@ public class BookingSystem {
 
 
 
-        // Derefter kan selve flowet begynde:
-        // Data som vi henter fra scanner input:
-        // customerName (ev.t hentet fra customerID checket)
-        // customerPhone (ev.t hentet fra customerID checket)
-        // date
-        // time
+    // Derefter kan selve flowet begynde:
+    // Data som vi henter fra scanner input:
+    // customerName (ev.t hentet fra customerID checket)
+    // customerPhone (ev.t hentet fra customerID checket)
+    // date
+    // time
 
 
-        //for at få vores variabel products er vi nødt til at lave et
-        // shoppingcart objekt som vi kalder cart
-        // ShoppingCart cart = new ShoppingCart()
-
-
-
+    //for at få vores variabel products er vi nødt til at lave et
+    // shoppingcart objekt som vi kalder cart
+    // ShoppingCart cart = new ShoppingCart()
 
 
 
-        // Når vi laver objektet så kaldes carts metode cart.showCart() som er et
-        // print af de mulige produkter. Produkterne har et toString allerede.
-        // Den bruger en scanner til at tilføje mulige produkter til en liste
-        // Vi bruger cart.addProduct()
-        // Metoden skal returner en arraylist af produkter som vi anvender her
-        // totalPrice udregnes af ShoppingCarts "showTotalPrice()"
-        // appId++ inkrementer bookingsystemets lokale værdi så vi kan have unikke bookinger
-       // Appointment example =  new Appointment(appId++, customerName, customerPhone... etc)
-        // appointments.add(example);
+
+
+
+    // Når vi laver objektet så kaldes carts metode cart.showCart() som er et
+    // print af de mulige produkter. Produkterne har et toString allerede.
+    // Den bruger en scanner til at tilføje mulige produkter til en liste
+    // Vi bruger cart.addProduct()
+    // Metoden skal returner en arraylist af produkter som vi anvender her
+    // totalPrice udregnes af ShoppingCarts "showTotalPrice()"
+    // appId++ inkrementer bookingsystemets lokale værdi så vi kan have unikke bookinger
+    // Appointment example =  new Appointment(appId++, customerName, customerPhone... etc)
+    // appointments.add(example);
 
 
 
 
     private void findAppointment() {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Indtast kundens fulde navn: ");
+        String customerName = input.nextLine();
+
+
+
         // Find navn
         // Find telefon
         // String name = scan.next() --> true
