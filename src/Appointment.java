@@ -5,14 +5,27 @@ import java.util.ArrayList;
 public class Appointment {
 
     private int appointmentId = 1;
+    private int customerId;
     private String customerName = "noname";
     private int customerPhone;
-    private int customerId;
     private LocalDate date;
     private LocalTime time;
     private ArrayList<Product> products;
     private double totalPrice;
     //private boolean hasPaid;
+
+
+    public Appointment(int appointmentId, String customerName, int customerPhone, int customerId,
+                       LocalDate date, LocalTime time, ArrayList<Product> products, double totalPrice) {
+        this.appointmentId = appointmentId;
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
+        this.customerId = customerId;
+        this.date = date;
+        this.time = time;
+        this.products = products;
+        this.totalPrice = totalPrice;
+    }
 
 
     public int getAppointmentId() {
