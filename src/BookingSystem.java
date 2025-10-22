@@ -66,7 +66,7 @@ public class BookingSystem {
 
 
         Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
-                time, cart, totalPrice);
+                time, products, totalPrice);
         appointment.add(appointment);
 
         System.out.println("new Appointment created: " + appointment);

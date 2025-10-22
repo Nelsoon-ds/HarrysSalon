@@ -22,7 +22,7 @@ public class ShoppingCart {
     public static void showProductList() {
         System.out.println("Product List: ");
         for (int i = 0; i < PRODUCTS.size(); i++) {
-            System.out.println(PRODUCTS.get(i));
+            System.out.println((i + 1) + " " + PRODUCTS.get(i));
         }
         System.out.println("End of List. ");
 
@@ -31,9 +31,11 @@ public class ShoppingCart {
 
 
 
+    public void addProduct(String productName){
+        for (Product product : PRODUCTS) {
+            if (product.getProductName().equalsIgnoreCase(productName)){
+        }
 
-
-    public void addProduct(Product product, int quantity){
         boolean found = false;
 
         //checker om der allerede er noget i Cart
