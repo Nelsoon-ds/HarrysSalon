@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Appointment {
 
     private int appointmentId = 1;
+    private int customerId;
     private String customerName = "noname";
     private int customerPhone;
     private LocalDate date;

@@ -10,101 +10,113 @@ public class BookingSystem {
     // Hvad er dens overordnede ansvar? A: At samle en appointment og tilføje den til appointments
     // Der skal laves en Appointment ud fra dens konstruktør
 
-    private ArrayList<Appointment> appointments = new ArrayList<>();
-    private int appointmentId = 1;
+    public static void main(String[] args) {
+        createAppointment();
+    }
 
 
-//    public static void createAppointment(){
-//
-//        Scanner input = new Scanner(System.in);
-//
-//        // Der skal være et IF-check som ser om der er et customerID
-//        // Hvis der et et customerID så læs deres navn & telefonnummer ud fra filen
-//
-//
-//        System.out.print("Enter CustomerName: ");
-//        String customerName = input.nextLine();
-//
-//        System.out.println("Enter CustomerPhone: ");
-//        int customerPhone = input.nextInt();
-//        input.nextLine();
-//
-//
-//        //Formatering af dato og tid
-//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-//
-//        System.out.println("Enter date (Format for date: dd/MM/yyyy): ");
-//        String dateString = input.nextLine();
-//        LocalDate date = LocalDate.parse(dateString, dateFormatter);
-//
-//        System.out.println("Enter time of appointment (Time format: HH:mm");
-//        String timeString = input.nextLine();
-//        LocalTime time = LocalTime.parse(timeString, timeFormatter);
-//
-//        //Shoppingcart her.
-//
-//        ShoppingCart cart = new ShoppingCart();
-//        ShoppingCart.showProductList();
-//
-//        boolean addingProducts = true;
-//        while (addingProducts) {
-//            System.out.print("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
-//            String productName = input.nextLine();
-//
-//            if (productName.equals("stop")){
-//                addingProducts = false;
-//            } else {
-//                cart.addProduct(productName);
-//            }
-//        }
-//
-//        double totalPrice = cart.showTotalPrice();
-//
-//
-//
-//        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date,
-//                time, cart, totalPrice);
-//
-//        System.out.println("new Appointment created: " + appointment);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//        // Derefter kan selve flowet begynde:
-//        // Data som vi henter fra scanner input:
-//        // customerName (ev.t hentet fra customerID checket)
-//        // customerPhone (ev.t hentet fra customerID checket)
-//        // date
-//        // time
-//
-//
-//        //for at få vores variabel products er vi nødt til at lave et
-//        // shoppingcart objekt som vi kalder cart
-//        // ShoppingCart cart = new ShoppingCart()
-//
-//
-//
-//
-//
-//
-//        // Når vi laver objektet så kaldes carts metode cart.showCart() som er et
-//        // print af de mulige produkter. Produkterne har et toString allerede.
-//        // Den bruger en scanner til at tilføje mulige produkter til en liste
-//        // Vi bruger cart.addProduct()
-//        // Metoden skal returner en arraylist af produkter som vi anvender her
-//        // totalPrice udregnes af ShoppingCarts "showTotalPrice()"
-//        // appId++ inkrementer bookingsystemets lokale værdi så vi kan have unikke bookinger
-//       // Appointment example =  new Appointment(appId++, customerName, customerPhone... etc)
-//        // appointments.add(example);
-//
-//
-//    }
+    private static ArrayList<Appointment> appointments = new ArrayList<>();
+    private static int appointmentId = 1;
+    private static int customerId = 1;
+    private static int customerPhone = 0;
+
+
+    public static void createAppointment() {
+        Scanner input = new Scanner(System.in);
+
+        // Indlæs kundens oplysninger
+        System.out.print("Indtast kundens navn: ");
+        String customerName = input.nextLine();
+
+
+        boolean numberCheckFalseTrue = false;
+
+        while (numberCheckFalseTrue == false) {
+            System.out.print("Indtast kundens telefonnummer: ");
+
+            if (input.hasNextInt()) {
+                customerPhone = input.nextInt();
+                numberCheckFalseTrue = true;
+            } else {
+                System.out.println("Indtast kun tal!");
+            }
+
+            input.nextLine();
+        }
+
+
+        // Formatering af dato til tid
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalDate date = null;
+        while (date == null) {
+            System.out.print("Indtast dato for aftalen (Format for dato: dd/MM/yyyy): ");
+            String dateString = input.nextLine();
+
+            try {
+                date = LocalDate.parse(dateString, dateFormatter);
+                if (date.getDayOfWeek().getValue() >= 6) {
+                    System.out.println("Brug kun en dato, på en af ugedagene: mandag - fredag");
+                    date = null;
+                }
+            } catch (Exception e) {
+                System.out.println("Fejl: forkert dato format (dd/MM/yyyy)!");
+            }
+        }
+
+        LocalTime time = null;
+        while (time == null) {
+            System.out.print("Indtast tidspunkt for aftale (Tidspunkt format: HH:mm): ");
+            String timeString = input.nextLine();
+
+            if (timeString.length() != 5) {
+                System.out.println("Brug kun formatet: HH:mm !");
+                continue;
+            }
+
+            try {
+                time = LocalTime.parse(timeString, timeFormatter);
+                if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(18, 0))) {
+                    System.out.println("Ugyldigt tidspunkt: Vær venlig at vælge et tidspunkt mellem 10:00 - 18:00!");
+                    time = null;
+                }
+            } catch (Exception e) {
+                System.out.println("Forkert format, vær venlig at bruge HH:mm!");
+        //Shoppingcart her.
+        ShoppingCart cart = new ShoppingCart();
+        boolean addingProducts = true;
+        while (addingProducts) {
+            System.out.println("Indtast tilvalg/tilkøb (skriv 'stop' for at stoppe): ");
+            String productName = input.nextLine();
+            if (productName.equalsIgnoreCase("stop")) {
+                addingProducts = false;
+            } else {
+                cart.addProduct(productName);
+            }
+        }
+
+        //vis kurv
+        System.out.println("\n--- " + customerName "s Kurv ---");
+        cart.showCart();
+
+        //total pris
+        System.out.println("\n--- Prisoversigt ---");
+        double totalPrice = cart.showTotalPrice();
+        ArrayList<Product> products = new ArrayList<>();
+
+        ArrayList<Product> selectedProducts = cart.getProducts();
+
+        System.out.println();
+
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, customerId,
+                date, time, products, totalPrice);
+
+        appointments.add(appointment);
+        System.out.println("Ny aftale oprettet: " + appointment);
+
+
+    } }}
 
     private void findAppointment() {
         // Find navn
@@ -160,7 +172,7 @@ public class BookingSystem {
 //        return appointments;
 //    }
 
-    public void saveAppointments (ArrayList<Appointment> appointments) {
+        public void saveAppointments (ArrayList<Appointment> appointments) {
         // kalder FileHandler med appointment listen
         // kalder FileHandler.save(appointments)
     }

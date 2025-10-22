@@ -1,22 +1,41 @@
 public class Product {
 
-    private String name;
-    private String price;
+    private String productName;
+    private String productPrice;
     private String delimiter = ";";
-    public Product(String name, String price) {
-        this.name = name;
-        this.price = price;
+    private String productQuantity;
+
+
+    public Product(String productName, String productPrice, String productQuantity) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productQuantity = productQuantity;
     }
 
-    public String getName(){
-        return name;
+    //setters og getters
+
+
+    public int getProductQuantity() {
+        return productQuantity;
     }
 
-    public String getPrice(){
-        return price;
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductPrice() {
+        return productPrice;
     }
 
     public String toString(){
-        return name + ":" + price + delimiter; // ; fungerer som delimiter
-    }
+        return productName + ":" + productPrice + delimiter; // ; fungerer som delimiter
+}
 }
