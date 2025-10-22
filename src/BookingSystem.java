@@ -154,23 +154,23 @@ public class BookingSystem {
         // eksistere eller er i forkert format.
     }
 
-    public ArrayList<Appointment> getAppointments() {
-        // Formål: At hente en liste af bookinger fra vores master fil
-        // Den skal have et objekt af vores FileHandler som så bruges til at kalde
-        // FileHandlers read() metode
-        // Derefter skal vi gemme resultaterne af det i vores appointments arraylist
-        // Vi starter dog med at bruge fake data til at arbejde med:
-        // Fake data:
-        Appointment app1 = new Appointment();
-        Appointment app2 = new Appointment();
-        Appointment app3 = new Appointment();
-        Appointment app4 = new Appointment();
-        appointments.add(app1);
-        appointments.add(app2);
-        appointments.add(app3);
-        appointments.add(app4);
-        return appointments;
-    }
+//    public ArrayList<Appointment> getAppointments() {
+//        // Formål: At hente en liste af bookinger fra vores master fil
+//        // Den skal have et objekt af vores FileHandler som så bruges til at kalde
+//        // FileHandlers read() metode
+//        // Derefter skal vi gemme resultaterne af det i vores appointments arraylist
+//        // Vi starter dog med at bruge fake data til at arbejde med:
+//        // Fake data:
+//        Appointment app1 = new Appointment();
+//        Appointment app2 = new Appointment();
+//        Appointment app3 = new Appointment();
+//        Appointment app4 = new Appointment();
+//        appointments.add(app1);
+//        appointments.add(app2);
+//        appointments.add(app3);
+//        appointments.add(app4);
+//        return appointments;
+//    }
 
         public void saveAppointments (ArrayList<Appointment> appointments) {
         // kalder FileHandler med appointment listen
