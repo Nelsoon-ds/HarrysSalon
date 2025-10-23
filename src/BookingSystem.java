@@ -16,9 +16,7 @@ public class BookingSystem {
     private static boolean running = true;
 
 
-
     public static void main(String[] args) {
-
         selectUser();
     }
 
@@ -42,8 +40,9 @@ public class BookingSystem {
             int choice = Sc.selectHarrietMenuOption();
             switch (choice) {
                 case 1 -> createAppointment();
-                //case 2 -> deleteAppointment();
-                //case 3 -> weekCalendar();
+                case 2 -> deleteAppointment();
+                // case 3 -> viewCalendar();
+                // case x -> editAppointment(); --> I can make this!
                 case 4 -> selectUser();
                 case 5 -> running = false;
             }
@@ -172,11 +171,15 @@ public class BookingSystem {
         }
     }
 
-    private void deleteAppointment(int appointmentId) {
+    private static void deleteAppointment() {
+        Scanner input = new Scanner(System.in);
+        int appIdtoDelete = input.nextInt();
         for (Appointment app : appointments) {
-            if (appointmentId == app.getAppointmentId()) {
+            if (appIdtoDelete == app.getAppointmentId()) {
                 System.out.println("Du har følgende kunde med deres aftale:");
                 System.out.println(app);
+                appointments.remove(app);
+                saveAppointments(appointments);
             }
         }
         System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);

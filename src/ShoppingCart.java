@@ -13,7 +13,10 @@ public class ShoppingCart {
             new Product("Balsam", "150", "1")
     ));
 
-    public ArrayList<Product> products = new ArrayList<>();
+    public static ArrayList<Product> products = new ArrayList<>();
+    static {
+        products.add(new Product("Hårklipning", "150", "1"));
+    }
 
     public ArrayList<Product> getProducts() {
         return products;
