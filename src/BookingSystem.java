@@ -18,6 +18,7 @@ public class BookingSystem {
 
     public static void main(String[] args) {
         selectUser();
+
     }
 
     private static void selectUser() {
@@ -41,7 +42,7 @@ public class BookingSystem {
             switch (choice) {
                 case 1 -> createAppointment();
                 case 2 -> deleteAppointment();
-                // case 3 -> viewCalendar();
+                case 3 -> viewCalendar();
                 // case x -> editAppointment(); --> I can make this!
                 case 4 -> selectUser();
                 case 5 -> running = false;
@@ -78,9 +79,6 @@ public class BookingSystem {
         }
 
     }
-
-
-
 
 
     public static void createAppointment() {
@@ -162,6 +160,13 @@ public class BookingSystem {
         saveAppointments(appointments);
     }
 
+    private static void viewCalendar() {
+        ArrayList<Appointment> currentAppointments = getAppointments();
+        CalendarUI.printCalendarHeader();
+        CalendarUI.printWeekCalendar(currentAppointments);
+    }
+
+
     private void findAppointment(String name) {
         for (Appointment app : appointments) {
             if (name.equals(app.getCustomerName())) {
@@ -185,23 +190,21 @@ public class BookingSystem {
         System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
     }
 
-    private void viewCalendar() {
-        // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
-        // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
-        // Fx. calendar.dateCalendar(date) bør give brugeren et print af specifik dato
-        // Exit-funktion som får os tilbage til systemet i booking system
-        // try catch så vi ikke bliver fanget af at sende et forkert input (fx dato som ikke
-        // eksistere eller er i forkert format.
-    }
+    // private void viewCalendar() {
+    // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
+    // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
+    // Fx. calendar.dateCalendar(date) bør give brugeren et print af specifik dato
+    // Exit-funktion som får os tilbage til systemet i booking system
+    // try catch så vi ikke bliver fanget af at sende et forkert input (fx dato som ikke
+    // eksistere eller er i forkert format.
+
 
     public static ArrayList<Appointment> getAppointments() {
-        return appointments;
+        return BookingSystem.appointments;
     }
 
     public static void saveAppointments(ArrayList<Appointment> appointments) {
         FileHandler.writeToFile(appointments);
     }
-
 }
-
 

@@ -14,3 +14,6 @@ appointmentId,customerName,customerPhone,date,time,products[],totalPrice
 15,Lotte G.,51515151,2025-11-12,14:15,BarberBlad|900|3;Balsam|150|1,2850.0
 16,mik,25176950,2025-12-12,13:00,Hårbørste|550|4;Shampoo|150|1,2350.0
 17,Toby,25176950,2025-12-12,13:00,[],0.0
+18,Tobias Kjeldsen,2020202,2025-10-27,10:00,Hårklipning|150|1,150.0
+19,Bob,12020202,2025-10-28,14:00,Hårklipning|150|1,150.0
+20,FEJL FEJL FEJL,2020200202,2025-10-30,13:29,Hårklipning|150|1,150.0
