@@ -17,7 +17,9 @@ public class BookingSystem {
 
 
     public static void main(String[] args) {
-        selectUser();
+        ArrayList<Appointment> currentAppointments = getAppointments();
+        CalendarUI.printCalendarHeader();
+        CalendarUI.printWeekCalendar(currentAppointments);
 
     }
 
@@ -33,6 +35,7 @@ public class BookingSystem {
             }
         }
     }
+
 
     private static void harrietsProgram() {
         System.out.println("\nVelkommen Harriet! :)");
