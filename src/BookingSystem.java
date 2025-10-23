@@ -9,14 +9,80 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
+
+    private static ScannerHelper Sc = new ScannerHelper();
     private static ArrayList<Appointment> appointments = FileHandler.readFromFile();
     private static int appointmentId = appointments.getLast().getAppointmentId() + 1;
+    private static boolean running = true;
+
 
 
     public static void main(String[] args) {
-        System.out.println(appointmentId);
-        createAppointment();
+
+        selectUser();
     }
+
+    private static void selectUser() {
+
+
+        while (running) {
+            int choice = Sc.selectUserOption();
+            switch (choice) {
+                case 1 -> harrietsProgram();
+                case 2 -> harrysProgram();
+                case 3 -> revisorsProgram();
+            }
+        }
+    }
+
+    private static void harrietsProgram() {
+        System.out.println("\nVelkommen Harriet! :)");
+
+        while (running) {
+            int choice = Sc.selectHarrietMenuOption();
+            switch (choice) {
+                case 1 -> createAppointment();
+                //case 2 -> deleteAppointment();
+                //case 3 -> weekCalendar();
+                case 4 -> selectUser();
+                case 5 -> running = false;
+            }
+        }
+    }
+
+    private static void harrysProgram() {
+        System.out.println("\nVelkommen Harry! :)");
+
+        while (running) {
+            int choice = Sc.selectHarryMenuOption();
+            switch (choice) {
+                case 1 -> createAppointment();
+                //case 2 -> deleteAppointment();
+                //case 3 -> weekCalendar();
+                //case 4 -> invoices();
+                case 5 -> selectUser();
+                case 6 -> running = false;
+            }
+        }
+    }
+
+    private static void revisorsProgram() {
+        System.out.println("\nVelkommen revisor! :)");
+
+        while (running) {
+            int choice = Sc.selectRevisorMenuOption();
+            switch (choice) {
+                //case 1 -> invoices();
+                case 2 -> selectUser();
+                case 3 -> running = false;
+            }
+        }
+
+    }
+
+
+
+
 
     public static void createAppointment() {
         Scanner input = new Scanner(System.in);
