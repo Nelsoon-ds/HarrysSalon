@@ -68,6 +68,16 @@ public class ShoppingCart {
             }
         System.out.println("Det er ikke et produkt vi har desværre.");
 
+    }
+
+    public void removeProduct(String productName) {
+        for (Product product : PRODUCTS) {
+            if(product.getProductName().equalsIgnoreCase(productName)) {
+                this.products.remove(product);
+                return;
+            }
+        }
+        System.out.println("Det er ikke et produkt vi har desværre.");
 
     }
     }

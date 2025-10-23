@@ -185,6 +185,29 @@ public class BookingSystem {
         System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
     }
 
+    private static void editAppointment() {
+        System.out.println("Which appointment do you want to change");
+        Scanner input = new Scanner(System.in);
+        int appointmentId = input.nextInt();
+        for (Appointment app : appointments) {
+            if (appointmentId == app.getAppointmentId()) {
+                System.out.println("Du har følgende kunde med deres aftale:");
+                System.out.println(app);
+                System.out.println("Hvad vil du gerne gøre?\n1.Tilføj produkt.\n2.Fjern produkt\nSvar 1 eller 2.");
+                int userInput = input.nextInt();
+                //Tilføj produkt
+                if (userInput == 1) {
+                }
+                //Tilføj fjern produkt
+                if (userInput == 2) {
+                }
+            }
+        }
+
+
+    }
+
+
     private void viewCalendar() {
         // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
         // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
