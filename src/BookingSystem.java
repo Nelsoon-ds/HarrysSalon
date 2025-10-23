@@ -10,28 +10,79 @@ import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
 
-    private static ArrayList<Appointment> appointments = new ArrayList<>(List.of(
-            // Aftale 1
-            new Appointment(1, "Test Kunde 1", 12345678,
-                    LocalDate.of(2024, 10, 20), LocalTime.of(9, 0),
-                    new ArrayList<>(), 500.0), // Bruger new ArrayList<>() for tom produktliste
-
-            // Aftale 2
-            new Appointment(2, "Test Kunde 2", 87654321,
-                    LocalDate.of(2024, 10, 21), LocalTime.of(10, 30),
-                    new ArrayList<>(), 750.0)
-
-            // Tilføj flere her adskilt af komma...
-    ));
+    private static ScannerHelper Sc = new ScannerHelper();
+    private static ArrayList<Appointment> appointments = FileHandler.readFromFile();
     private static int appointmentId = 1;
+    private static boolean running = true;
+
+
+
     public static void main(String[] args) {
-        appointments = FileHandler.readFromFile();
-        for (int i = 0; i < appointments.size(); i++) {
-            System.out.println(appointments.get(i));
-        }
-//        createAppointment();
-//        FileHandler.writeToFile(appointments);
+
+        selectUser();
     }
+
+    private static void selectUser() {
+
+
+        while (running) {
+            int choice = Sc.selectUserOption();
+            switch (choice) {
+                case 1 -> harrietsProgram();
+                case 2 -> harrysProgram();
+                case 3 -> revisorsProgram();
+            }
+        }
+    }
+
+    private static void harrietsProgram() {
+        System.out.println("\nVelkommen Harriet! :)");
+
+        while (running) {
+            int choice = Sc.selectHarrietMenuOption();
+            switch (choice) {
+                case 1 -> createAppointment();
+                //case 2 -> deleteAppointment();
+                //case 3 -> weekCalendar();
+                case 4 -> selectUser();
+                case 5 -> running = false;
+            }
+        }
+    }
+
+    private static void harrysProgram() {
+        System.out.println("\nVelkommen Harry! :)");
+
+        while (running) {
+            int choice = Sc.selectHarryMenuOption();
+            switch (choice) {
+                case 1 -> createAppointment();
+                //case 2 -> deleteAppointment();
+                //case 3 -> weekCalendar();
+                //case 4 -> invoices();
+                case 5 -> selectUser();
+                case 6 -> running = false;
+            }
+        }
+    }
+
+    private static void revisorsProgram() {
+        System.out.println("\nVelkommen revisor! :)");
+
+        while (running) {
+            int choice = Sc.selectRevisorMenuOption();
+            switch (choice) {
+                //case 1 -> invoices();
+                case 2 -> selectUser();
+                case 3 -> running = false;
+            }
+        }
+
+    }
+
+
+
+
 
     public static void createAppointment() {
         Scanner input = new Scanner(System.in);
