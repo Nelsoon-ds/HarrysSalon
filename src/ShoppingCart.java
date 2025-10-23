@@ -33,11 +33,9 @@ public class ShoppingCart {
     }
     public void showProductList() {
         System.out.println("Harrys Salon Produktliste:");
-        System.out.println("Nr\tNavn\tPris\tAntal");
+        System.out.printf("%-3s %-20s %5s %6s\n", "Nr", "Navn", "Pris", "Antal");
         for (int i = 0; i < PRODUCTS.size(); i++) {
-            System.out.println((i + 1) + " " + PRODUCTS.get(i));
-        }
-       // kan evt. bruges til debug? System.out.println(Arrays.toString(PRODUCTS.toArray()));
+            System.out.printf("%-3s %s\n", (i + 1), PRODUCTS.get(i));        }
     }
 
     public double showTotalPrice(){
@@ -58,7 +56,7 @@ public class ShoppingCart {
         for (Product product : PRODUCTS) {
                 if(product.getProductName().equalsIgnoreCase(productName)) {
                     Scanner scan = new Scanner(System.in);
-                    System.out.println("Hvor mange " + productName + " vil du købe?");
+                    System.out.println("Hvor mange " + productName.toUpperCase() + " vil du købe?");
                     String productQuantity = scan.next();
                     String productPrice = product.getProductPrice();
                     this.products.add(new Product(productName, productPrice, productQuantity));

@@ -34,8 +34,7 @@ public class Product {
     public String getProductPrice() {
         return productPrice;
     }
-
-    public String toString(){
-        return productName + "|" + productPrice + "|" + productQuantity;
-}
+    @Override
+    public String toString() {
+        return String.format("%-20s %5s %6s", productName, productPrice, productQuantity);    }
 }
