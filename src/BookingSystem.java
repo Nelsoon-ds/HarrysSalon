@@ -12,7 +12,7 @@ public class BookingSystem {
 
     private static ScannerHelper Sc = new ScannerHelper();
     private static ArrayList<Appointment> appointments = FileHandler.readFromFile();
-    private static int appointmentId = 1;
+    private static int appointmentId = appointments.getLast().getAppointmentId() + 1;
     private static boolean running = true;
 
 
@@ -155,49 +155,34 @@ public class BookingSystem {
                 cart.addProduct(productName); // skal fikses
             }
         }
-
-        //total pris
-        System.out.println("\n--- Prisoversigt ---");
         ArrayList<Product> selectedProducts = cart.getProducts();
-        System.out.println(selectedProducts);
         double totalPrice = cart.showTotalPrice();
-        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone,
-                date, time, selectedProducts, totalPrice);
+        Appointment appointment = new Appointment(appointmentId++, customerName, customerPhone, date, time, selectedProducts, totalPrice);
         appointments.add(appointment);
-        System.out.println("Ny aftale oprettet: " + appointment);
-
-                System.out.println("Og print nu listen");
-                System.out.println(appointment);
-
-    }
-    private void findAppointment() {
-        // Find navn
-        // Find telefon
-        // String name = scan.next() --> true
-        // int telefon = scan.nextInt(); --> true
-        // Hvad er deres position i arraylisten?
-        // Vi kan bruge en Scanner til at indhente navn, telefon
-        // Scanner scan = new Scanner()
-        // appointments.contains(navn)
-        // inner loop: apppointments.contains(telefon)
-        // if true --> for ( Appointment app : appointmentlist) {
-        // if (app.customerName.equals(name) || app.customerPhone == telefon)
-        //  print(appointment) }
-        // Print de appointments som matcher navn og telefon
-        // Find en appointment med de to variabler
-        // Slut flow
+        System.out.println("Ny aftale oprettet:\n" + appointment);
+        saveAppointments(appointments);
     }
 
-    private void deleteAppointment(int appointmentId){
-        // Formål: at fjerne en appointment fra appointments
-        // For hvert element i vores appointmentlist
-        // Tjek om appointmentId == værdien i appointmentId på en af vores appointment
-        // Try  appointments.remove(appointmentId)
-        // Catch --> print("Vi fandt ikke et ID")
-        // Hvis den finder et match:
+    private void findAppointment(String name) {
+        for (Appointment app : appointments) {
+            if (name.equals(app.getCustomerName())) {
+                System.out.println("Du har følgende kunde med deres aftale:");
+                System.out.println(app);
+            }
+        }
     }
 
-    private void viewCalendar(){
+    private void deleteAppointment(int appointmentId) {
+        for (Appointment app : appointments) {
+            if (appointmentId == app.getAppointmentId()) {
+                System.out.println("Du har følgende kunde med deres aftale:");
+                System.out.println(app);
+            }
+        }
+        System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
+    }
+
+    private void viewCalendar() {
         // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
         // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
         // Fx. calendar.dateCalendar(date) bør give brugeren et print af specifik dato
@@ -206,14 +191,13 @@ public class BookingSystem {
         // eksistere eller er i forkert format.
     }
 
-    public static ArrayList<Appointment>  getAppointments() {
+    public static ArrayList<Appointment> getAppointments() {
         return appointments;
     }
 
-//    public void saveAppointments (ArrayList<Appointment> appointments) {
-//        // kalder FileHandler med appointment listen
-//        // kalder FileHandler.save(appointments)
-//    }
+    public static void saveAppointments(ArrayList<Appointment> appointments) {
+        FileHandler.writeToFile(appointments);
+    }
 
 }
 

@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Appointment {
 
     private int appointmentId = 1;
-    private int customerId;
     private String customerName = "noname";
     private int customerPhone;
     private LocalDate date;
@@ -29,10 +29,6 @@ public class Appointment {
 
     public int getAppointmentId() {
         return appointmentId;
-    }
-
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
     }
 
     public String getCustomerName() {
@@ -71,10 +67,6 @@ public class Appointment {
         return products;
     }
 
-//    public void setProducts(ArrayList<Product> products) {
-//        this.products = products;
-//    }
-
     public double getTotalPrice() {
         return totalPrice;
     }
@@ -93,26 +85,20 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return appointmentId +
-                 customerName +
-                  customerPhone +
-                  date +
-                 time +
-                 products +
-                 totalPrice;
+        String productsSummary = products.stream()
+                .map(product ->
+                        product.getProductName() +
+                                ": " + product.getProductPrice() +
+                                ", Antal: " + product.getProductQuantity())
+                .collect(Collectors.joining("; ")); // Join with a semicolon and space
+        return "--- AFTALER ---" +
+                "\nID: " + appointmentId +
+                "\nKunde: " + customerName + " (" + customerPhone + ")" +
+                "\nDato/Tidspunkt: " + date + " @ " + time +
+                "\nTotal Pris: " + String.format("DKK %.2f", totalPrice) +
+                "\nStatus: " + (hasPaid ? "BETALT" : "UBETALT") +
+                "\nTilkøbs Produkter: [" + productsSummary+ "]" +
+                "\n---------------------";
     }
-
-    private void addProducts(Product product){
-       // products.add(String.valueOf(product));
-    }
-
-//    private void removeProducts(Product product){
-//        products.remove(product);
-//
-//
-//    }
-
-
-
 }
 

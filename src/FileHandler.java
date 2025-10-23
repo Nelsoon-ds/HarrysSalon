@@ -11,7 +11,6 @@ public class FileHandler {
     static String bookingFile = "masterdata/bookings.csv";
     String invoiceFile = "masterdata/invoices.csv";
 
-
     /**
      * <p>Den tager vores 8 Appointment attributer og konverterer dem til et Appointment objekt</p>
      *
@@ -24,7 +23,7 @@ public class FileHandler {
         int customerPhone = Integer.parseInt(parts[2]);
         LocalDate date = LocalDate.parse(parts[3]);
         LocalTime time = LocalTime.parse(parts[4]);
-        String rawProductString = parts[5];
+        String rawProductString = parts[5].trim();
         ArrayList<Product> products = convertRawStringtoArrayList(rawProductString);
         double totalPrice = Double.parseDouble(parts[6]);
         return new Appointment(appointmentId, customerName, customerPhone, date, time, products, totalPrice);
@@ -54,19 +53,18 @@ public class FileHandler {
     public static ArrayList<Product> convertRawStringtoArrayList(String productString) {
         ArrayList<Product> products = new ArrayList<>();
         String cleanedString = productString.trim();
-        if (cleanedString.startsWith("[") && cleanedString.endsWith("]")) {
-            cleanedString = cleanedString.substring(1, cleanedString.length() - 1); // fjern start og slut
-        } else {
+        if (cleanedString.equals("[]")) {
             return products;
         }
         if (cleanedString.isEmpty()) {
             return products;
         }
-        // 1. Først så deler vi det i individuelle produkter
-        String[] individualProducts = cleanedString.split(", ");
+        String[] individualProducts = cleanedString.split(";");
 
         for (String entry : individualProducts) {
-            // 2.  Nu deler vi det så i navn, pris, antal
+            String cleanEntry = entry.trim();
+            if (cleanEntry.isEmpty()) continue; // Skip
+            // Del det i navn,pris,antal
             String[] parts = entry.split("\\|");
             if (parts.length == 3) {
                 String productName = parts[0].trim();
@@ -74,7 +72,7 @@ public class FileHandler {
                 String productQuantity = parts[2].trim();
                 products.add(new Product(productName, productPrice, productQuantity));
             } else {
-                System.err.println("Warning: Malformed product entry: " + entry);
+                System.err.println("Fejl: Formateringen af produktet er forkert og er derfor ikke med i Appointments: " + entry);
             }
         }
         return products;
@@ -88,7 +86,7 @@ public class FileHandler {
         for (Product product : products) {
             productStrings.add(product.getProductName() + "|" + product.getProductPrice() + "|" + product.getProductQuantity());
         }
-        return "[" + String.join(", ", productStrings) + "]";
+        return String.join(";", productStrings);
     }
 
     static void writeToFile(ArrayList<Appointment> appointments) {
@@ -114,30 +112,5 @@ public class FileHandler {
             System.out.println("Fejl ved skrivning til fil: " + e.getMessage());
         }
     }
-
-//    private static String[] fakeApps() {
-//        // 1. Opret listen, der skal returneres
-//        ArrayList<Appointment> appointmentsList = new ArrayList<>();
-//        // Appointment 1
-//        ArrayList<Product> products = new ArrayList<>();
-//        Product h1 = new Product("Hårvask", "100", "3");
-//        Product h2 = new Product("Hårvask", "200", "3");
-//        products.add(h1);
-//        products.add(h2);
-//
-//        Appointment app1 = new Appointment(1, "Anna Jensen", 22334455, LocalDate.of(2025, 10, 28)
-//                , LocalTime.of(10, 0), products, 649.0);
-//        appointmentsList.add(app1); // <-- Tilføj til listen
-//
-//
-//        String[] stringAppointmentList = new String[appointmentsList.size()];
-//        // Det samme gør sig gældende for vores appointments
-//        for (int i = 0; i < appointmentsList.size(); i++) {
-//            stringAppointmentList[i] = appointmentsList.get(i).toString();
-//        }
-//
-//        // 2. Returner den færdige liste
-//        return stringAppointmentList;
-//    }
 }
 
