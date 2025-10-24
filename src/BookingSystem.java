@@ -2,6 +2,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +19,11 @@ public class BookingSystem {
 
     public static void main(String[] args) {
         ArrayList<Appointment> currentAppointments = getAppointments();
-        CalendarUI.printCalendarHeader();
-        CalendarUI.printWeekCalendar(currentAppointments);
+        CalendarUI calendar = new CalendarUI();
+        calendar.printCalendarHeader();
+        calendar.printWeekCalendar(currentAppointments);
+
+        calendar.viewCalendarForSpecificDate(appointments);
 
     }
 
@@ -42,10 +46,13 @@ public class BookingSystem {
 
         while (running) {
             int choice = Sc.selectHarrietMenuOption();
+
+            BookingSystem system = new BookingSystem();
+
             switch (choice) {
                 case 1 -> createAppointment();
                 case 2 -> deleteAppointment();
-                case 3 -> viewCalendar();
+                case 3 -> system.viewCalendar();
                 // case x -> editAppointment(); --> I can make this!
                 case 4 -> selectUser();
                 case 5 -> running = false;
@@ -121,6 +128,7 @@ public class BookingSystem {
                 }
             } catch (Exception e) {
                 System.out.println("Fejl: forkert dato format (dd/MM/yyyy)!");
+                continue;
             }
         }
 
@@ -163,10 +171,11 @@ public class BookingSystem {
         saveAppointments(appointments);
     }
 
-    private static void viewCalendar() {
+    private void viewCalendar() {
         ArrayList<Appointment> currentAppointments = getAppointments();
-        CalendarUI.printCalendarHeader();
-        CalendarUI.printWeekCalendar(currentAppointments);
+        CalendarUI calendar = new CalendarUI();
+        calendar.printCalendarHeader();
+        calendar.printWeekCalendar(appointments);
     }
 
 
