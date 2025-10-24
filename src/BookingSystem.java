@@ -2,6 +2,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,13 @@ public class BookingSystem {
 
 
     public static void main(String[] args) {
-        selectUser();
+        ArrayList<Appointment> currentAppointments = getAppointments();
+        CalendarUI calendar = new CalendarUI();
+        calendar.printCalendarHeader();
+        calendar.printWeekCalendar(currentAppointments);
+
+        calendar.viewCalendarForSpecificDate(appointments);
+
     }
 
 
@@ -62,10 +69,13 @@ public class BookingSystem {
 
         while (running) {
             int choice = Sc.selectHarrietMenuOption();
+
+            BookingSystem system = new BookingSystem();
+
             switch (choice) {
                 case 1 -> createAppointment();
                 case 2 -> deleteAppointment();
-                // case 3 -> viewCalendar();
+                case 3 -> system.viewCalendar();
                 case 4 -> editAppointment();
                 case 5 -> selectUser();
                 case 6 -> {
@@ -84,7 +94,7 @@ public class BookingSystem {
             switch (choice) {
                 case 1 -> createAppointment();
                 case 2 -> deleteAppointment();
-                //case 3 -> viewCalendar();
+                case 3 -> viewCalendar();
                 case 4 -> editAppointment();
                 //case 5 -> invoices();
                 case 6 -> selectUser();
@@ -159,6 +169,7 @@ public class BookingSystem {
                     }
                 } catch (Exception e) {
                     System.out.println("Fejl: forkert dato format (dd/MM/yyyy)!");
+                    continue;
                 }
             }
 
@@ -216,6 +227,14 @@ public class BookingSystem {
 
     }
 
+    private void viewCalendar() {
+        ArrayList<Appointment> currentAppointments = getAppointments();
+        CalendarUI calendar = new CalendarUI();
+        calendar.printCalendarHeader();
+        calendar.printWeekCalendar(appointments);
+    }
+
+
     private void findAppointment(String name) {
         for (Appointment app : appointments) {
             if (name.equals(app.getCustomerName())) {
@@ -224,7 +243,6 @@ public class BookingSystem {
             }
         }
     }
-
 
     private static void deleteAppointment() {
         Scanner input = new Scanner(System.in);
@@ -305,26 +323,16 @@ public class BookingSystem {
                     }
                 }
             }
-
         }
-    }
-
-
-
-    private void viewCalendar() {
-        // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
-        // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
-        // Fx. calendar.dateCalendar(date) bør give brugeren et print af specifik dato
-        // Exit-funktion som får os tilbage til systemet i booking system
-        // try catch så vi ikke bliver fanget af at sende et forkert input (fx dato som ikke
-        // eksistere eller er i forkert format.
+        System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
     }
 
     public static ArrayList<Appointment> getAppointments() {
-        return appointments;
+        return BookingSystem.appointments;
     }
 
     public static void saveAppointments(ArrayList<Appointment> appointments) {
         FileHandler.writeToFile(appointments);
-    }}
+    }
+}
 
