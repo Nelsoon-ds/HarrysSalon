@@ -37,18 +37,18 @@ public class CalendarUI {
 
 
     public static void printCalendarHeader() {
-        int colWeek = 8;
-        int colDate = 10;
-        int colDay = 12;
-        int colHour = 10;
+        int calenderColumnWeekHeader = 8;
+        int calenderColumnDateHeader = 10;
+        int calenderColumnDayHeader = 12;
+        int calenderColumnHourHeader = 10;
 
         StringBuilder header = new StringBuilder();
-        header.append("║ ").append(centerText("Uge", colWeek))
-                .append(" │ ").append(centerText("Dato", colDate))
-                .append(" │ ").append(centerText("Ugedag", colDay)).append(" │");
+        header.append("║ ").append(centerText("Uge", calenderColumnWeekHeader))
+                .append(" │ ").append(centerText("Dato", calenderColumnDateHeader))
+                .append(" │ ").append(centerText("Ugedag", calenderColumnDayHeader)).append(" │");
 
         for (int h = 10; h <= 18; h++) {
-            header.append(" ").append(centerText(h + ":00", colHour)).append(" ║");
+            header.append(" ").append(centerText(h + ":00", calenderColumnHourHeader)).append(" ║");
         }
 
         int totalLength = header.length();
@@ -61,10 +61,10 @@ public class CalendarUI {
 
 
     public static void printWeekCalendar(ArrayList<Appointment> appointments) {
-        int colWeek = 8;
-        int colDate = 10;
-        int colDay = 12;
-        int colHour = 10;
+        int calenderColumnWeekBody = 8;
+        int calenderColumnDateBody = 10;
+        int calenderColumnDayBody = 12;
+        int calenderColumnHourBody = 10;
 
         LocalDate today = LocalDate.now();
         LocalDate monday = today.minusDays(today.getDayOfWeek().getValue() - 1);
@@ -88,19 +88,19 @@ public class CalendarUI {
             StringBuilder line = new StringBuilder();
 
             if (dayOfWeek == DayOfWeek.MONDAY) {
-                line.append("│ ").append(centerText("Uge " + weekNumber, colWeek)).append(" │");
+                line.append("│ ").append(centerText("Uge " + weekNumber, calenderColumnWeekBody)).append(" │");
             } else {
-                line.append("│ ").append(centerText("", colWeek)).append(" │");
+                line.append("│ ").append(centerText("", calenderColumnWeekBody)).append(" │");
             }
 
 
-            line.append(" ").append(centerText(dayNumber, colDate))
-                    .append(" │ ").append(centerText(dayName, colDay)).append(" │");
+            line.append(" ").append(centerText(dayNumber, calenderColumnDateBody))
+                    .append(" │ ").append(centerText(dayName, calenderColumnDayBody)).append(" │");
 
 
             for (int h = 10; h <= 18; h++) {
                 String status = getStatusForSlot(day, h, appointments);
-                line.append(" ").append(centerText(status, colHour)).append(" │");
+                line.append(" ").append(centerText(status, calenderColumnHourBody)).append(" │");
             }
 
             System.out.println(line);
