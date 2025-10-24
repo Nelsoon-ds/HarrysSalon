@@ -1,11 +1,6 @@
-import java.io.File;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
@@ -18,18 +13,11 @@ public class BookingSystem {
 
 
     public static void main(String[] args) {
-        ArrayList<Appointment> currentAppointments = getAppointments();
-        CalendarUI calendar = new CalendarUI();
-        calendar.printCalendarHeader();
-        calendar.printWeekCalendar(currentAppointments);
-
-        calendar.viewCalendarForSpecificDate(appointments);
-
+        selectUser();
     }
 
 
     private static void selectUser() {
-
 
         while (running) {
             int choice = Sc.selectUserOption();
@@ -69,34 +57,14 @@ public class BookingSystem {
 
         while (running) {
             int choice = Sc.selectHarrietMenuOption();
-
             BookingSystem system = new BookingSystem();
 
             switch (choice) {
                 case 1 -> createAppointment();
                 case 2 -> deleteAppointment();
-                case 3 -> system.viewCalendar();
-                case 4 -> editAppointment();
-                case 5 -> selectUser();
-                case 6 -> {
-                    System.out.println("Lukker programmet...");
-                    running = false;
-                }
-            }
-        }
-    }
-
-    private static void harrysProgram() {
-        System.out.println("\nVelkommen Harry! :)");
-
-        while (running) {
-            int choice = Sc.selectHarryMenuOption();
-            switch (choice) {
-                case 1 -> createAppointment();
-                case 2 -> deleteAppointment();
-                case 3 -> viewCalendar();
-                case 4 -> editAppointment();
-                //case 5 -> invoices();
+                case 3 -> editAppointment();
+                case 4 -> system.viewCalendar();
+                case 5 -> system.viewDateFromCalendar();
                 case 6 -> selectUser();
                 case 7 -> {
                     System.out.println("Lukker programmet...");
@@ -106,15 +74,41 @@ public class BookingSystem {
         }
     }
 
+    private static void harrysProgram() {
+        System.out.println("\nVelkommen Harry! :)");
+        BookingSystem system = new BookingSystem();
+        AccountingSystem acc = new AccountingSystem();
+
+        while (running) {
+            int choice = Sc.selectHarryMenuOption();
+            switch (choice) {
+                case 1 -> createAppointment();
+                case 2 -> deleteAppointment();
+                case 3 -> editAppointment();
+                case 4 -> system.viewCalendar();
+                case 5 -> system.viewDateFromCalendar();
+                case 6 -> acc.startProgram();
+                case 7 -> printAllAppointments();
+                case 8 -> selectUser();
+                case 9 -> {
+                    System.out.println("Lukker programmet...");
+                    running = false;
+                }
+            }
+        }
+    }
+
     private static void revisorsProgram() {
+        AccountingSystem acc = new AccountingSystem();
         System.out.println("\nVelkommen revisor! :)");
 
         while (running) {
             int choice = Sc.selectRevisorMenuOption();
             switch (choice) {
-                //case 1 -> invoices();
-                case 2 -> selectUser();
-                case 3 -> {
+                case 1 -> acc.startProgram();
+                case 2 -> printAllAppointments();
+                case 3 -> selectUser();
+                case 4 -> {
                     System.out.println("Lukker programmet...");
                     running = false;
                 }
@@ -181,6 +175,10 @@ public class BookingSystem {
                     System.out.println("Brug kun formatet: HH:mm !");
                     continue;
                 }
+                if (time.isBefore(LocalTime.now())) {
+                    System.out.println("Vælg venligst en fremtidig tid :)");
+                    return;
+                }
                 if (!isTimeSlotAvailable(date, time)) {
                     System.out.println("Tidspunktet er allerede booket. Vælg et andet tidspunkt.");
                     return;
@@ -206,7 +204,7 @@ public class BookingSystem {
                 if (productName.equalsIgnoreCase("stop")) {
                     addingProducts = false;
                 } else {
-                    cart.addProduct(productName); // skal fikses
+                    cart.addProduct(productName);
                 }
             }
             ArrayList<Product> selectedProducts = cart.getProducts();
@@ -232,7 +230,16 @@ public class BookingSystem {
         CalendarUI calendar = new CalendarUI();
         calendar.printCalendarHeader();
         calendar.printWeekCalendar(appointments);
+
     }
+
+
+    private void viewDateFromCalendar() {
+        ArrayList<Appointment> currentAppointments = getAppointments();
+        CalendarUI calendar = new CalendarUI();
+        calendar.viewCalendarForSpecificDate(appointments);
+    }
+
 
 
     private void findAppointment(String name) {
@@ -270,10 +277,11 @@ public class BookingSystem {
                                 appointments.remove(app);
                                 saveAppointments(appointments);
                                 System.out.println("Aftale slettet!");
+                                return;
                             } else {
                                 System.out.println("Sletning annulleret.");
+                                return;
                             }
-                            break;
                         }
                     }
 
@@ -333,6 +341,12 @@ public class BookingSystem {
 
     public static void saveAppointments(ArrayList<Appointment> appointments) {
         FileHandler.writeToFile(appointments);
+    }
+
+    public static void printAllAppointments() {
+        for (Appointment appointment : appointments) {
+            System.out.println(appointment);
+        }
     }
 }
 

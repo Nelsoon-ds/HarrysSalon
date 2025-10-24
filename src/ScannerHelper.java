@@ -56,16 +56,18 @@ public class ScannerHelper {
     public int selectHarrietMenuOption() {
         boolean numCorrect = false;
         int selectInt = 0;
-        int selectIntMax = 6;
+        int selectIntMax = 7;
+
 
         System.out.println("\nVælg funktion:");
-        System.out.println("1: Book en tid");
+        System.out.println("1: Opret booking");
         System.out.println("2: Slet booking");
-        System.out.println("3: Se kalender");
-        System.out.println("4: Rediger en tid");
-        System.out.println("5: Skift bruger");
-        System.out.println("6: Luk program");
-        System.out.print("Indtast tal (1-5): ");
+        System.out.println("3: Rediger booking");
+        System.out.println("4: Se kalender");
+        System.out.println("5: Se bookings på dato");
+        System.out.println("6: Skift bruger");
+        System.out.println("7: Luk program");
+        System.out.print("Indtast tal (1-7): ");
 
         while (!numCorrect) {
 
@@ -94,17 +96,19 @@ public class ScannerHelper {
     public int selectHarryMenuOption() {
         boolean numCorrect = false;
         int selectInt = 0;
-        int selectIntMax = 7;
+        int selectIntMax = 9;
 
         System.out.println("\nVælg funktion:");
-        System.out.println("1: Book en tid");
+        System.out.println("1: Opret booking");
         System.out.println("2: Slet booking");
-        System.out.println("3: Se kalender");
-        System.out.println("4: Rediger en tid");
-        System.out.println("5: Se invoices");
-        System.out.println("5: Skift bruger");
-        System.out.println("6: Luk program");
-        System.out.print("Indtast tal (1-5): ");
+        System.out.println("3: Rediger booking");
+        System.out.println("4: Se kalender");
+        System.out.println("5: Se bookings på dato");
+        System.out.println("6: Se salgsstatistik");
+        System.out.println("7: Udskriv alle bookings");
+        System.out.println("8: Skift bruger");
+        System.out.println("9: Luk program");
+        System.out.print("Indtast tal (1-9): ");
 
         while (!numCorrect) {
 
@@ -132,13 +136,14 @@ public class ScannerHelper {
     public int selectRevisorMenuOption() {
         boolean numCorrect = false;
         int selectInt = 0;
-        int selectIntMax = 3;
+        int selectIntMax = 4;
 
         System.out.println("\nVælg funktion:");
-        System.out.println("1: Se invoices");
-        System.out.println("2: Skift bruger");
-        System.out.println("3: Luk program");
-        System.out.print("Indtast tal (1-3): ");
+        System.out.println("1: Se salgsstatistik");
+        System.out.println("2: Udskriv alle bookings");
+        System.out.println("3: Skift bruger");
+        System.out.println("4: Luk program");
+        System.out.print("Indtast tal (1-4): ");
 
         while (!numCorrect) {
 

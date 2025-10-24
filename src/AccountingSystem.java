@@ -25,6 +25,7 @@ public class AccountingSystem {
     static int totalProductsSold = 0;
     int monthSale = 0;
     int daySale = 0;
+    String valuta = ",00 DKK";
 
 
     static void main(String[] args) {
@@ -34,7 +35,7 @@ public class AccountingSystem {
 
     }
 
-    private void startProgram() {
+    public void startProgram() {
         AccountingSystem accounting = new AccountingSystem();
         getProductCount();
         accounting.calculateProductSales();
@@ -76,14 +77,14 @@ public class AccountingSystem {
     private void calculateProductSales() {
         shampooInDkk = shampooSales * shampooPrice;
         System.out.println("Penge tjent på Shampoo:");
-        System.out.println(shampooInDkk);
+        System.out.println(shampooInDkk+valuta);
         balsamInDkk = balsamSales * balsamPrice;
         System.out.println("Penge tjent på Balsam:");
-        System.out.println(balsamInDkk);
+        System.out.println(balsamInDkk+valuta);
         hårbørsteInDkk = hårbørsteSales * hårbørstePrice;
         System.out.println("Penge tjent på hårbørster:");
         hårKlipningInDkk = hårKlipningSales * hårklipningPrice;
-        System.out.println(hårKlipningInDkk);
+        System.out.println(hårKlipningInDkk+valuta);
         totalSales = shampooInDkk + balsamInDkk + hårKlipningInDkk;
     }
 
