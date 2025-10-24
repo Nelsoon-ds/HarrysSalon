@@ -36,5 +36,5 @@ public class Product {
     }
     @Override
     public String toString() {
-        return String.format("%-20s %5s %6s", productName, productPrice, productQuantity);    }
+        return String.format("%-25s %5s %6s", productName, productPrice, productQuantity);    }
 }
