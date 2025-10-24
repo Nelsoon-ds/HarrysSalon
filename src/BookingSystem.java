@@ -270,47 +270,30 @@ public class BookingSystem {
             }
         }
 
-    private static void editAppointment() {
-        System.out.println("\n--- SLET BOOKING ---");
-        System.out.print("Indtast Appointment ID for at slette: ");
-        Scanner input = new Scanner(System.in);
-
-        while (running) {
-            int choice = Sc.editAppMenuOption();
-            switch (choice) {
-                case 1 -> addproduct();
-                case 2 -> deleteproduct();
-                case 3 -> endpayment
-                case 4 -> {
-                    System.out.println("Lukker programmet...");
-                    running = false;
-                }
-            }
-        }
-
-    }
 
     private static void editAppointment() {
-
-        while (true) {
+        boolean runningMan = true;
+        while (runningMan) {
             System.out.println("\n--- REDIGER BOOKING ---");
             System.out.print("Indtast Appointment ID for at redigere: ");
-
             Scanner input = new Scanner(System.in);
+            ShoppingCart cart = new ShoppingCart();
             int appointmentId = input.nextInt();
+            input.nextLine();
             for (Appointment app : appointments) {
                 if (appointmentId == app.getAppointmentId()) {
                     System.out.println("Du har følgende kunde med deres aftale:");
                     System.out.println(app);
                     System.out.println("Hvad vil du gerne gøre?\n1. Tilføj produkt.\n2. Fjern produkt.\n3. Afslut betaling.\nVælg (1-3): ");
-
                     //Tilføj produkt
                     int userInput = input.nextInt();
                     if (userInput == 1) {
+                        cart.showProductList();
                         System.out.print("Indtast produktnavn: ");
                         String productName = input.nextLine();
-                        System.out.println("Produkt tilføjet!");
-                        app.
+                        app.addNewProduct(productName);
+                        saveAppointments(appointments);
+                        runningMan = false;
                     }
 
                     //Tilføj fjern produkt

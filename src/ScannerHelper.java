@@ -162,39 +162,4 @@ public class ScannerHelper {
         }
         return selectInt;
     }
-
-    public int editAppointment() {
-        boolean numCorrect = false;
-        int selectInt = 0;
-        int selectIntMax = 4;
-
-        System.out.println("\nVælg funktion:");
-        System.out.println("1: Tilføj produkter");
-        System.out.println("2: Fjern produkter");
-        System.out.println("3: Afslut betaling");
-        System.out.println("4: Tilbage til hovedmenuen");
-        System.out.print("Indtast tal (1-4): ");
-
-        while (!numCorrect) {
-
-            if (sc.hasNextInt()) {
-                selectInt = sc.nextInt();
-                sc.nextLine();
-
-                if (selectInt < 0) {
-                    System.out.println("Du har indtastet et negativt tal. Prøv igen");
-                } else if (selectInt == 0) {
-                    System.out.println("0 er ikke en mulighed. Prøv igen");
-                } else if (selectInt > selectIntMax) {
-                    System.out.println("Du kan ikke indtaste tal større end " + selectIntMax + ". Prøv igen");
-                } else {
-                    numCorrect = true;
-                }
-            } else {
-                System.out.println("Det er ikke et tal. Prøv igen");
-                sc.nextLine();
-            }
-        }
-        return selectInt;
-    }
 }
