@@ -202,15 +202,6 @@ public class BookingSystem {
         System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
     }
 
-    // private void viewCalendar() {
-    // Formål: Lav et CalendarUI objekt og kald dens metoder efter behov
-    // Fx. calendar.weekCalendar(weekNr) bør give brugeren et print af hele arbejdsugen
-    // Fx. calendar.dateCalendar(date) bør give brugeren et print af specifik dato
-    // Exit-funktion som får os tilbage til systemet i booking system
-    // try catch så vi ikke bliver fanget af at sende et forkert input (fx dato som ikke
-    // eksistere eller er i forkert format.
-
-
     public static ArrayList<Appointment> getAppointments() {
         return BookingSystem.appointments;
     }
