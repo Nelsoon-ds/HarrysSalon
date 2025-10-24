@@ -166,9 +166,9 @@ public class CalendarUI {
 
             System.out.println("\nAftaler for dato: " + date.format(dateFormatter) + "\n");
 
-            for (Appointment appt : appointments) {
-                if (appt.getDate().equals(date)) {
-                    System.out.println(appt);
+            for (Appointment appointment : appointments) {
+                if (appointment.getDate().equals(date)) {
+                    System.out.println(appointment);
                 }
             }
         }
