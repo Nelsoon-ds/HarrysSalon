@@ -55,10 +55,6 @@ public class ShoppingCart {
         return total;
     }
 
-    /*
-    Den her metode har meget brug for noget validering
-    Ala: Try/Catch
-     */
     public void addProduct(String productName) {
         for (Product product : PRODUCTS) {
                 if(product.getProductName().equalsIgnoreCase(productName)) {
@@ -85,54 +81,3 @@ public class ShoppingCart {
 
     }
     }
-
-
-
-/*
-* Vi skal fikse det her efter vi har fået styr på data typerne med parseren i FileHandler.
- */
-
-
-
-
-
-//    public void addProduct(String productName, String quantity){
-//        for (Product product : PRODUCTS) {
-//            if (product.getProductName().equalsIgnoreCase(productName)){
-//        //checker om der allerede er noget i Cart
-//            boolean found = false;
-//            for (Product p : products) {
-//            if (p.getProductName().equalsIgnoreCase(productName){
-//                p.setProductQuantity(quantity);
-//                found = true;
-//                System.out.println(quantity + " stk. " + product.getProductName() + "tilføjet til kurven. Nyt antal: " + p.getProductQuantity());
-//                break;
-//            }
-//        }
-//            if (!found) {
-//                Product newProduct = new Product(product.getProductName(), product.getProductPrice());
-//                 newProduct.setProductQuantity(quantity);
-//                product.add(newProduct);
-//                System.out.println(quantity + " stk. " + product.getProductName() + "tilføjet til kurven.");
-//            }
-//            return;
-//        }
-//            System.out.println("Produktet \"" + productName + "\" findes ikke i sortimentet.");
-
-
-//        public void removeProduct(String productName, int quantity)
-//        for (Product p : products) {
-//            if (p.getProductName.equalsIgnoreCase(productName)) {
-//                if (p.getProductQuantity() > quantity){
-//                    p.setProductQuantity(product.getProductQuantity() - quantity);
-//                    System.out.println(quantity + " stk. " + p.getProductName() + "fjernet fra kurv. *NYT* antal: " + p.getProductQuantity());
-//                } else {
-//                    product.remove(p);
-//                    System.out.println(product.getProductName() + " er fjernet fra kurven.");
-//                }
-//                return;
-//            }
-//            System.out.println("Produktet \"" + productName + "\" findes ikke i kurven.");
-//        }
-//
-
