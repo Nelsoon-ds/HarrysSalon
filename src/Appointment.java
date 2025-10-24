@@ -11,8 +11,10 @@ public class Appointment {
     private LocalDate date;
     private LocalTime time;
     private ArrayList<Product> products;
-    private double totalPrice;
     private boolean hasPaid;
+
+    // Accounting Variables
+    private double totalPrice;
 
 
     public Appointment(int appointmentId, String customerName, int customerPhone,
