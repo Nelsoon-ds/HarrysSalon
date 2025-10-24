@@ -10,7 +10,11 @@ public class ShoppingCart {
     public static final List<Product> PRODUCTS = new ArrayList<Product>(Arrays.asList(
             new Product("Hårbørste", "550", "1"),
             new Product("Shampoo", "150", "1"),
-            new Product("Balsam", "150", "1")
+            new Product("Balsam", "150", "1"),
+            new Product("Sophie's Sleek Serum", "99", "1"),
+            new Product("David's Divine Detangler", "289", "1"),
+            new Product("Johan's Jazzy Jel", "89", "1"),
+            new Product("Tobias' Trusty Treatment", "150", "1")
     ));
 
     public static ArrayList<Product> products = new ArrayList<>();

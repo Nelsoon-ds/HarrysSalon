@@ -28,6 +28,14 @@ public class Appointment {
         this.totalPrice = totalPrice;
     }
 
+    public void addNewProduct(String productName) {
+        for (Product product : ShoppingCart.PRODUCTS) {
+            if (productName.equalsIgnoreCase(product.getProductName())) {
+                products.add(product);
+                System.out.println(product);
+            }
+        }
+    }
 
     public int getAppointmentId() {
         return appointmentId;
