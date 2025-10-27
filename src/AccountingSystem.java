@@ -26,6 +26,12 @@ public class AccountingSystem {
     private int hårbørsteInDkk = 0;
     private double totalSales = 0;
 
+
+    public AccountingSystem(ArrayList<Appointment> bookings) {
+        this.bookings = bookings;
+        startProgram();
+    }
+
     public void startProgram() {
         // 1. Tæl alle produkter solgt
         calculateAllProductCounts();

@@ -9,11 +9,9 @@ public class BookingSystem {
 
     private final ScannerHelper Sc = new ScannerHelper();
     private final FileHandler fh = new FileHandler();
-    private final AccountingSystem acc = new AccountingSystem();
     private ArrayList<Appointment> appointments = fh.readFromFile();
     private int appointmentId = appointments.getLast().getAppointmentId() + 1;
     private boolean running = true;
-
 
 
     public static void main(String[] args) {
@@ -91,7 +89,7 @@ public class BookingSystem {
                 case 3 -> editAppointment();
                 case 4 -> system.viewCalendar();
                 case 5 -> system.viewDateFromCalendar();
-                case 6 -> acc.startProgram();
+                case 6 -> new AccountingSystem(appointments);
                 case 7 -> printAllAppointments();
                 case 8 -> selectUser();
                 case 9 -> {
@@ -103,7 +101,7 @@ public class BookingSystem {
     }
 
     private void revisorsProgram() {
-        AccountingSystem acc = new AccountingSystem();
+        AccountingSystem acc = new AccountingSystem(appointments);
         System.out.println("\nVelkommen revisor! :)");
 
         while (running) {
