@@ -6,29 +6,29 @@ import java.util.ArrayList;
 public class AccountingSystem {
     ArrayList<Appointment> bookings = FileHandler.readFromFile();
     // Produkter vi sælger
-    static int shampooSales = 0;
-    static int balsamSales = 0;
-    static int hårKlipningSales = 0;
-    static int hårbørsteSales = 0;
+    private int shampooSales = 0;
+    private int balsamSales = 0;
+    private int hårKlipningSales = 0;
+    private int hårbørsteSales = 0;
     // Priser:
-    int shampooPrice = 550;
-    int balsamPrice = 150;
-    int hårbørstePrice = 550;
-    int hårklipningPrice = 150;
+    private final int shampooPrice = 550;
+    private final int balsamPrice = 150;
+    private final int hårbørstePrice = 550;
+    private final int hårklipningPrice = 150;
     // Penge vi har tjent på forskellige produkter
-    int shampooInDkk = 0;
-    int balsamInDkk = 0;
-    int hårKlipningInDkk = 0;
-    int hårbørsteInDkk = 0;
+    private int shampooInDkk = 0;
+    private int balsamInDkk = 0;
+    private int hårKlipningInDkk = 0;
+    private int hårbørsteInDkk = 0;
     // Definer værdier for operationer
-    double totalSales = 0;
-    static int totalProductsSold = 0;
-    int monthSale = 0;
-    int daySale = 0;
-    String valuta = ",00 DKK";
+    private double totalSales = 0;
+    private int totalProductsSold = 0;
+    private int monthSale = 0;
+    private int daySale = 0;
+    private final String valuta = ",00 DKK";
 
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         AccountingSystem acc = new AccountingSystem();
         acc.startProgram();
 
@@ -77,14 +77,14 @@ public class AccountingSystem {
     private void calculateProductSales() {
         shampooInDkk = shampooSales * shampooPrice;
         System.out.println("Penge tjent på Shampoo:");
-        System.out.println(shampooInDkk+valuta);
+        System.out.println(shampooInDkk + valuta);
         balsamInDkk = balsamSales * balsamPrice;
         System.out.println("Penge tjent på Balsam:");
-        System.out.println(balsamInDkk+valuta);
+        System.out.println(balsamInDkk + valuta);
         hårbørsteInDkk = hårbørsteSales * hårbørstePrice;
         System.out.println("Penge tjent på hårbørster:");
         hårKlipningInDkk = hårKlipningSales * hårklipningPrice;
-        System.out.println(hårKlipningInDkk+valuta);
+        System.out.println(hårKlipningInDkk + valuta);
         totalSales = shampooInDkk + balsamInDkk + hårKlipningInDkk;
     }
 
