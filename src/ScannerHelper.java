@@ -16,9 +16,9 @@ public class ScannerHelper {
 
             System.out.println("");
             System.out.println("    ******************************************");
-            System.out.println("    *     💈H A R R Y ' S   S A L O N 💈      *");
+            System.out.println("    *     💈H A R R Y ' S   S A L O N 💈     *");
             System.out.println("    *----------------------------------------*");
-            System.out.println("    *     ✂️  CUTS | SHAVES | STYLES ✂️       *");
+            System.out.println("    *     ✂️  CUTS | SHAVES | STYLES ✂️      *");
             System.out.println("    ******************************************\n");
 
 

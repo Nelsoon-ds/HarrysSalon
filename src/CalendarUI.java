@@ -32,10 +32,14 @@ public class CalendarUI {
     int calenderColumnDayBody = 12;
     int calenderColumnHourBody = 10;
 
+
+    //konstruktør til standard dansk sprog.
     public CalendarUI() {
         this.locale = new Locale("da", "DK");
     }
 
+
+    //konstruktør til hvis du vil bruge andet sprog.
     public CalendarUI(Locale locale) {
         this.locale = locale;
     }
@@ -99,7 +103,7 @@ public class CalendarUI {
 
             String dayName = dayOfWeek.getDisplayName(TextStyle.FULL, locale);
             String dayNumber = day.format(dateFormatter);
-            String monthName = day.getMonth().getDisplayName(TextStyle.FULL, locale);
+            String monthName = day.getMonth().getDisplayName(TextStyle.FULL, locale); //mulighed for visning af måned.
             int weekNumber = day.get(WeekFields.of(locale).weekOfWeekBasedYear());
 
             //marker dato "i dag".
@@ -126,7 +130,7 @@ public class CalendarUI {
 
             System.out.println(line);
 
-            // sikre at der ikke bliver printet ekstra linjer, hvis der ikke er en uge.
+            // Sørger for at der ikke bliver printet ekstra linjer, hvis der ikke er en uge.
             if (dayOfWeek == DayOfWeek.SUNDAY) {
                 System.out.println("└" + "─".repeat(line.length() - 2) + "┘");
 
