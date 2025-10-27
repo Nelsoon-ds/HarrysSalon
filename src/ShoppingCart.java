@@ -8,18 +8,18 @@ public class ShoppingCart {
      * Produktlisten som vi indsætter produkter i
       */
     public static final List<Product> PRODUCTS = new ArrayList<Product>(Arrays.asList(
-            new Product("Hårbørste", "550", "1"),
-            new Product("Shampoo", "150", "1"),
-            new Product("Balsam", "150", "1"),
-            new Product("Sophie's Sleek Serum", "99", "1"),
-            new Product("David's Divine Detangler", "289", "1"),
-            new Product("Johan's Jazzy Jel", "89", "1"),
-            new Product("Tobias' Trusty Treatment", "150", "1")
+            new Product("Hårbørste", 550, 1),
+            new Product("Shampoo", 150, 1),
+            new Product("Balsam", 150, 1),
+            new Product("Sophie's Sleek Serum", 99, 1),
+            new Product("David's Divine Detangler", 289, 1),
+            new Product("Johan's Jazzy Jel", 89, 1),
+            new Product("Tobias' Trusty Treatment", 150, 1)
     ));
 
     public static ArrayList<Product> products = new ArrayList<>();
     static {
-        products.add(new Product("Hårklipning", "150", "1"));
+        products.add(new Product("Hårklipning", 150, 1));
     }
 
     public ArrayList<Product> getProducts() {
@@ -60,8 +60,8 @@ public class ShoppingCart {
                 if(product.getProductName().equalsIgnoreCase(productName)) {
                     Scanner scan = new Scanner(System.in);
                     System.out.println("Hvor mange " + productName.toUpperCase() + " vil du købe?");
-                    String productQuantity = scan.next();
-                    String productPrice = product.getProductPrice();
+                    int productQuantity = scan.nextInt();
+                    double productPrice = product.getProductPrice();
                     this.products.add(new Product(productName, productPrice, productQuantity));
                     return;
                 }

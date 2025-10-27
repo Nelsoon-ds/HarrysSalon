@@ -1,11 +1,11 @@
 public class Product {
 
     private String productName;
-    private String productPrice;
-    private String productQuantity;
+    private double productPrice;
+    private int productQuantity;
 
 
-    public Product(String productName, String productPrice, String productQuantity) {
+    public Product(String productName, double productPrice, int productQuantity) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
@@ -14,11 +14,11 @@ public class Product {
     //setters og getters
 
 
-    public String getProductQuantity() {
+    public int getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(String productQuantity) {
+    public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
     }
 
@@ -30,7 +30,7 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
     @Override

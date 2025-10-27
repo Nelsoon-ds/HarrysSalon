@@ -117,8 +117,8 @@ public class FileHandler {
             // Igen, et sikkerhedstjek: Vi skal have præcis 3 dele (Navn, Pris, Antal)
             if (parts.length == 3) {
                 String productName = parts[0].trim();
-                String productPrice = parts[1].trim();
-                String productQuantity = parts[2].trim();
+                double productPrice = Double.parseDouble(parts[1].trim());
+                int productQuantity = Integer.parseInt(parts[2].trim());
                 products.add(new Product(productName, productPrice, productQuantity));
             } else {
                 // Print en tydelig fejl, hvis dataen er korrupt, så vi ved det.
@@ -168,9 +168,9 @@ public class FileHandler {
             // Skriv CSV-headeren (kolonnenavnene) som den allerførste linje
             writer.write("appointmentId,customerName,customerPhone,date,time,products[],totalPrice\n");
 
-            // Gennemløb hver aftale i listen
+            // Løb igennem hver aftale i listen
             for (Appointment appointment : appointments) {
-                // Konverter den indlejrede produktliste til dens streng-format
+                // Konverter den nestede produktliste til et String format
                 String productsString = convertProductListToString(appointment.getProducts());
 
                 // Saml alle aftalens data til en enkelt CSV-linje (adskilt af ',')
@@ -186,7 +186,6 @@ public class FileHandler {
                 // Skriv linjen til filen, efterfulgt af et linjeskift
                 writer.write(line + "\n");
             }
-            // Bekræft i konsollen, at skrivningen er gennemført
             System.out.println(appointments.size() + " aftaler er skrevet til bookings.csv");
 
         } catch (IOException e) {

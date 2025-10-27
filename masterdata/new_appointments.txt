@@ -1,5 +1,0 @@
-appointmentId,customerName,customerPhone,customerId,date,time,totalPrice,hasPaid,products
-1,John Doe,12345678,101,2025-10-28,10:00,45.0,true,Haircut;Shampoo
-2,Jane Smith,87654321,102,2025-10-28,11:00,60.0,false,Haircut;Beard Trim
-3,Peter Jones,11223344,103,2025-10-29,14:00,25.0,true,Shampoo
-4,Mary Miller,44332211,104,2025-10-29,15:00,80.0,false,Haircut;Hair Coloring

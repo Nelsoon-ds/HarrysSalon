@@ -176,10 +176,6 @@ public class BookingSystem {
                     System.out.println("Brug kun formatet: HH:mm !");
                     continue;
                 }
-                if (time.isBefore(LocalTime.now())) {
-                    System.out.println("Vælg venligst en fremtidig tid :)");
-                    return;
-                }
                 if (!isTimeSlotAvailable(date, time)) {
                     System.out.println("Tidspunktet er allerede booket. Vælg et andet tidspunkt.");
                     return;
