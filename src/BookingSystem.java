@@ -1,3 +1,4 @@
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -6,18 +7,22 @@ import java.time.format.DateTimeFormatter;
 
 public class BookingSystem {
 
-    private static ScannerHelper Sc = new ScannerHelper();
-    private static ArrayList<Appointment> appointments = FileHandler.readFromFile();
-    private static int appointmentId = appointments.getLast().getAppointmentId() + 1;
-    private static boolean running = true;
+    private final ScannerHelper Sc = new ScannerHelper();
+    private final FileHandler fh = new FileHandler();
+    private final AccountingSystem acc = new AccountingSystem();
+    private ArrayList<Appointment> appointments = fh.readFromFile();
+    private int appointmentId = appointments.getLast().getAppointmentId() + 1;
+    private boolean running = true;
+
 
 
     public static void main(String[] args) {
-        selectUser();
+        BookingSystem booking = new BookingSystem();
+        booking.selectUser();
     }
 
 
-    private static void selectUser() {
+    private void selectUser() {
 
         while (running) {
             int choice = Sc.selectUserOption();
@@ -38,7 +43,7 @@ public class BookingSystem {
     }
 
 
-    private static boolean authenticateUser() {
+    private boolean authenticateUser() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Indtast adgangskode: ");
         String inputPassword = scanner.nextLine();
@@ -52,7 +57,7 @@ public class BookingSystem {
         }
     }
 
-    private static void harrietsProgram() {
+    private void harrietsProgram() {
         System.out.println("\nVelkommen Harriet! :)");
 
         while (running) {
@@ -74,10 +79,9 @@ public class BookingSystem {
         }
     }
 
-    private static void harrysProgram() {
+    private void harrysProgram() {
         System.out.println("\nVelkommen Harry! :)");
         BookingSystem system = new BookingSystem();
-        AccountingSystem acc = new AccountingSystem();
 
         while (running) {
             int choice = Sc.selectHarryMenuOption();
@@ -98,7 +102,7 @@ public class BookingSystem {
         }
     }
 
-    private static void revisorsProgram() {
+    private void revisorsProgram() {
         AccountingSystem acc = new AccountingSystem();
         System.out.println("\nVelkommen revisor! :)");
 
@@ -118,7 +122,7 @@ public class BookingSystem {
     }
 
 
-    public static void createAppointment() {
+    public void createAppointment() {
         Scanner input = new Scanner(System.in);
         int customerPhone = 0;
         // Indlæs kundens oplysninger
@@ -163,7 +167,6 @@ public class BookingSystem {
                     }
                 } catch (Exception e) {
                     System.out.println("Fejl: forkert dato format (dd/MM/yyyy)!");
-                    continue;
                 }
             }
 
@@ -219,7 +222,7 @@ public class BookingSystem {
         }
     }
 
-    private static boolean isTimeSlotAvailable(LocalDate date, LocalTime time) {
+    private boolean isTimeSlotAvailable(LocalDate date, LocalTime time) {
         return appointments.stream()
                 .noneMatch(app -> app.getDate().equals(date) && app.getTime().equals(time));
 
@@ -235,7 +238,6 @@ public class BookingSystem {
 
 
     private void viewDateFromCalendar() {
-        ArrayList<Appointment> currentAppointments = getAppointments();
         CalendarUI calendar = new CalendarUI();
         calendar.viewCalendarForSpecificDate(appointments);
     }
@@ -251,7 +253,7 @@ public class BookingSystem {
         }
     }
 
-    private static void deleteAppointment() {
+    private void deleteAppointment() {
         Scanner input = new Scanner(System.in);
 
 
@@ -297,7 +299,7 @@ public class BookingSystem {
         }
 
 
-    private static void editAppointment() {
+    private void editAppointment() {
         boolean runningMan = true;
         while (runningMan) {
             System.out.println("\n--- REDIGER BOOKING ---");
@@ -335,15 +337,15 @@ public class BookingSystem {
         System.out.println("Der var ingen aftale med følgende AppointmentID: " + appointmentId);
     }
 
-    public static ArrayList<Appointment> getAppointments() {
-        return BookingSystem.appointments;
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public static void saveAppointments(ArrayList<Appointment> appointments) {
-        FileHandler.writeToFile(appointments);
+    public void saveAppointments(ArrayList<Appointment> appointments) {
+        fh.writeToFile(appointments);
     }
 
-    public static void printAllAppointments() {
+    public void printAllAppointments() {
         for (Appointment appointment : appointments) {
             System.out.println(appointment);
         }

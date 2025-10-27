@@ -1,50 +1,64 @@
 import java.time.LocalDate;
-import java.time.MonthDay;
-import java.time.chrono.ChronoLocalDate;
+// import java.time.MonthDay; // Fjernet - Blev ikke brugt
+// import java.time.chrono.ChronoLocalDate; // Fjernet - Blev ikke brugt
 import java.util.ArrayList;
 
 public class AccountingSystem {
-    ArrayList<Appointment> bookings = FileHandler.readFromFile();
-    // Produkter vi sælger
-    private int shampooSales = 0;
-    private int balsamSales = 0;
-    private int hårKlipningSales = 0;
-    private int hårbørsteSales = 0;
+
+    // Data:
+    private final FileHandler fh = new FileHandler();
+    private ArrayList<Appointment> bookings = fh.readFromFile();
+
     // Priser:
     private final int shampooPrice = 550;
     private final int balsamPrice = 150;
     private final int hårbørstePrice = 550;
     private final int hårklipningPrice = 150;
-    // Penge vi har tjent på forskellige produkter
+    private final String valuta = ",00 DKK";
+
+    // Felter til at gemme beregnet tilstand (state)
+    private int shampooSales = 0;
+    private int balsamSales = 0;
+    private int hårKlipningSales = 0;
+    private int hårbørsteSales = 0;
+    private int totalProductsSold = 0;
+
     private int shampooInDkk = 0;
     private int balsamInDkk = 0;
     private int hårKlipningInDkk = 0;
     private int hårbørsteInDkk = 0;
-    // Definer værdier for operationer
     private double totalSales = 0;
-    private int totalProductsSold = 0;
-    private int monthSale = 0;
-    private int daySale = 0;
-    private final String valuta = ",00 DKK";
-
 
     public static void main(String[] args) {
+        // 2. Opret objektet med dataen
         AccountingSystem acc = new AccountingSystem();
+
+        // 3. Kør rapporten
         acc.startProgram();
-
-
     }
 
     public void startProgram() {
-        AccountingSystem accounting = new AccountingSystem();
-        getProductCount();
-        accounting.calculateProductSales();
-        accounting.countOfProductSales();
+        // 1. Tæl alle produkter solgt
+        calculateAllProductCounts();
+        printProductCounts();
+
+        System.out.println("\n--- Omsætning ---");
+
+        // 2. Beregn omsætning baseret på de tal
+        calculateAllProductRevenue();
+        printProductRevenue();
+
+        // 3. Print totalen
+        System.out.println("-------------------");
+        System.out.println("Total omsætning: " + totalSales + valuta);
     }
 
-    private void getProductCount() {
-        for (int i = 0; i < bookings.size(); i++) {
-            ArrayList<Product> currBooking = bookings.get(i).getProducts();
+    /**
+     * Tæller alle produktsalg og gemmer dem i klassens felter.
+     */
+    private void calculateAllProductCounts() {
+        for (Appointment appointment : bookings) {
+            ArrayList<Product> currBooking = appointment.getProducts();
             for (Product product : currBooking) {
                 totalProductsSold++;
                 if (product.getProductName().equalsIgnoreCase("Shampoo")) {
@@ -60,51 +74,46 @@ public class AccountingSystem {
         }
     }
 
-
-    private void countOfProductSales() {
-        System.out.println("Antal af produktsalg");
-        System.out.println();
+    /**
+     * Printer de optalte produktsalg til konsollen.
+     */
+    private void printProductCounts() {
+        System.out.println("--- Antal af produktsalg ---");
         System.out.println("Shampoos solgt: " + shampooSales);
         System.out.println("-------------------");
         System.out.println("Balsams solgt: " + balsamSales);
         System.out.println("-------------------");
         System.out.println("Hårklipninger solgt: " + hårKlipningSales);
+        System.out.println("-------------------");
+        System.out.println("Hårbørster solgt: " + hårbørsteSales);
     }
 
     /**
-     * Tager vores salg og ganger den med vores priser for at beregne den samlede intjening i DKK
+     * Beregner den samlede omsætning for hvert produkt
+     * og den samlede omsætning for alle salg.
      */
-    private void calculateProductSales() {
+    private void calculateAllProductRevenue() {
         shampooInDkk = shampooSales * shampooPrice;
+        balsamInDkk = balsamSales * balsamPrice;
+        hårbørsteInDkk = hårbørsteSales * hårbørstePrice;
+        hårKlipningInDkk = hårKlipningSales * hårklipningPrice;
+        totalSales = shampooInDkk + balsamInDkk + hårKlipningInDkk + hårbørsteInDkk;
+    }
+
+    /**
+     * Printer den beregnede omsætning til konsollen.
+     */
+    private void printProductRevenue() {
         System.out.println("Penge tjent på Shampoo:");
         System.out.println(shampooInDkk + valuta);
-        balsamInDkk = balsamSales * balsamPrice;
+
         System.out.println("Penge tjent på Balsam:");
         System.out.println(balsamInDkk + valuta);
-        hårbørsteInDkk = hårbørsteSales * hårbørstePrice;
-        System.out.println("Penge tjent på hårbørster:");
-        hårKlipningInDkk = hårKlipningSales * hårklipningPrice;
+
+        System.out.println("Penge tjent på Hårbørster:");
+        System.out.println(hårbørsteInDkk + valuta);
+
+        System.out.println("Penge tjent på Hårklipning:");
         System.out.println(hårKlipningInDkk + valuta);
-        totalSales = shampooInDkk + balsamInDkk + hårKlipningInDkk;
     }
-
-    private void calculateMonth(LocalDate month) {
-        for (Appointment appointment : bookings) {
-            if (month.isEqual(ChronoLocalDate.from(appointment.getDate().getMonth()))) {
-                monthSale += appointment.getTotalPrice();
-            }
-        }
-    }
-
-//    private void calculateDay(LocalDate day) {
-//        for (Appointment appointment : bookings) {
-//            if (day.isEqual(ChronoLocalDate.from(appointment.getDate().getDayOfWeek() {
-//                monthSale += appointment.getTotalPrice();
-//            }
-//        }
-//
-//    }
 }
-
-
-

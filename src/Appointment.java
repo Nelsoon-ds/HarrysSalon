@@ -100,7 +100,7 @@ public class Appointment {
                         product.getProductName() +
                                 ": " + product.getProductPrice() +
                                 ", Antal: " + product.getProductQuantity())
-                .collect(Collectors.joining("; ")); // Join with a semicolon and space
+                .collect(Collectors.joining("; "));
         return "--- AFTALER ---" +
                 "\nID: " + appointmentId +
                 "\nKunde: " + customerName + " (" + customerPhone + ")" +

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class FileHandler {
     static String bookingFile = "masterdata/bookings.csv";
     String invoiceFile = "masterdata/invoices.csv";
-
+    
     /**
      * <p>Den tager vores 8 Appointment attributer og konverterer dem til et Appointment objekt</p>
      *
      * @param parts
      * @return Returnerer et Appointment objekt
      */
-    public static Appointment parseAttributes(String[] parts) {
+    private Appointment parseAttributes(String[] parts) {
         int appointmentId = Integer.parseInt(parts[0]);
         String customerName = parts[1];
         int customerPhone = Integer.parseInt(parts[2]);
@@ -30,7 +30,7 @@ public class FileHandler {
     }
 
 
-    public static ArrayList<Appointment> readFromFile() {
+    public ArrayList<Appointment> readFromFile() {
         // Vi opretter et array med vores appointments med den rette længde
         ArrayList<Appointment> appointments = new ArrayList<>();
         // Læs igen og udfyld arrayet
@@ -49,8 +49,7 @@ public class FileHandler {
         return appointments;
     }
 
-
-    public static ArrayList<Product> convertRawStringtoArrayList(String productString) {
+    private ArrayList<Product> convertRawStringtoArrayList(String productString) {
         ArrayList<Product> products = new ArrayList<>();
         String cleanedString = productString.trim();
         if (cleanedString.equals("[]")) {
@@ -78,7 +77,7 @@ public class FileHandler {
         return products;
     }
 
-    private static String convertProductListToString(ArrayList<Product> products) {
+    private String convertProductListToString(ArrayList<Product> products) {
         if (products == null || products.isEmpty()) {
             return "[]";
         }
@@ -89,12 +88,13 @@ public class FileHandler {
         return String.join(";", productStrings);
     }
 
-    static void writeToFile(ArrayList<Appointment> appointments) {
+    public void writeToFile(ArrayList<Appointment> appointments) {
+        FileHandler fh = new FileHandler();
         try (FileWriter writer = new FileWriter(bookingFile)) {
             // Skriv header
             writer.write("appointmentId,customerName,customerPhone,date,time,products[],totalPrice\n");
             for (Appointment appointment : appointments) {
-                String productsString = convertProductListToString(appointment.getProducts());
+                String productsString = fh.convertProductListToString(appointment.getProducts());
                 String line = String.join(",",
                         String.valueOf(appointment.getAppointmentId()),
                         appointment.getCustomerName(),
