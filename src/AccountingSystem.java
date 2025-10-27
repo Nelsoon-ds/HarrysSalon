@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-// import java.time.MonthDay; // Fjernet - Blev ikke brugt
-// import java.time.chrono.ChronoLocalDate; // Fjernet - Blev ikke brugt
 import java.util.ArrayList;
 
 public class AccountingSystem {
@@ -28,14 +25,6 @@ public class AccountingSystem {
     private int hårKlipningInDkk = 0;
     private int hårbørsteInDkk = 0;
     private double totalSales = 0;
-
-    public static void main(String[] args) {
-        // 2. Opret objektet med dataen
-        AccountingSystem acc = new AccountingSystem();
-
-        // 3. Kør rapporten
-        acc.startProgram();
-    }
 
     public void startProgram() {
         // 1. Tæl alle produkter solgt
