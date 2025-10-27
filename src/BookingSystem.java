@@ -171,11 +171,23 @@ public class BookingSystem {
             while (time == null) {
                 System.out.print("Indtast tidspunkt for aftale (Tidspunkt format: HH:mm): ");
                 String timeString = input.nextLine();
+
                 if (timeString.length() != 5) {
                     System.out.println("Brug kun formatet: HH:mm !");
                     continue;
                 }
-                if (time.isBefore(LocalTime.now())) {
+
+
+                try {
+                    time = LocalTime.parse(timeString, timeFormatter);
+
+                    if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(18, 0))) {
+                        System.out.println("Ugyldigt tidspunkt: Vær venlig at vælge et tidspunkt mellem 10:00 - 18:00!");
+                        time = null;
+                        continue;
+                    }
+
+                if (time.isBefore(LocalTime.now()) && date.equals(LocalDate.now())) {
                     System.out.println("Vælg venligst en fremtidig tid :)");
                     return;
                 }
@@ -184,15 +196,11 @@ public class BookingSystem {
                     return;
                 }
 
-                try {
-                    time = LocalTime.parse(timeString, timeFormatter);
-                    if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(18, 0))) {
-                        System.out.println("Ugyldigt tidspunkt: Vær venlig at vælge et tidspunkt mellem 10:00 - 18:00!");
-                        time = null;
-                    }
                 } catch (Exception e) {
                     System.out.println("Forkert format, vær venlig at bruge HH:mm!");
                 }
+
+
             }
             //Shoppingcart her.
             ShoppingCart cart = new ShoppingCart();

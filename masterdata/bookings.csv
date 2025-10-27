@@ -54,3 +54,4 @@ appointmentId,customerName,customerPhone,date,time,products[],totalPrice
 53,Sofie Hougaard,45464748,2025-12-03,12:00,Hårklipning|150|1;Shampoo|150|2,600.0
 54,Victor Bak,46474849,2025-12-03,13:00,Hårklipning|150|1;Balsam|150|3,600.0
 55,Freja Krogh,47484950,2025-12-03,14:00,Hårklipning|150|1;Hårbørste|550|2,1400.0
+56,TEST TEST,123123,2025-10-30,16:00,Hårklipning|150|1,150.0
